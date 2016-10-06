@@ -2,6 +2,8 @@
 //variabelen worden hier aangemaakt om later ergens ander op te kunnen roepen  
 $voornaam = "Robbert";
 $achternaam = "Luit"
+    
+//Commentaar hierzo: $voornaam . " " . $achternaam
 
 ?>
 
@@ -17,7 +19,8 @@ $achternaam = "Luit"
         <section class="body">
             <p>
                 <?php 
-            echo $voornaam . " " . $achternaam
+            echo $voornaam . " " . $achternaam;
+            //OF Commentaar hierzo: $voornaam . " " . $achternaam
             ?>
             </p>
         </section>
