@@ -1,11 +1,9 @@
 <?php 
-
-echo "Robbert Luit";
+//variabelen worden hier aangemaakt om later ergens ander op te kunnen roepen  
+$voornaam = "Robbert";
+$achternaam = "Luit"
 
 ?>
-
-
-
 
     <!doctype html>
     <html>
@@ -17,7 +15,11 @@ echo "Robbert Luit";
     <body class="web-backend-opdracht">
 
         <section class="body">
-
+            <p>
+                <?php 
+            echo $voornaam . " " . $achternaam
+            ?>
+            </p>
         </section>
     </body>
 
