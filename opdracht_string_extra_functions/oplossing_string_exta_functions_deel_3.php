@@ -45,11 +45,7 @@ $langsteWoord = 'zandzeepsodemineralenwatersteenstralen';
                 </p>
 
                 <li>Vervang nu alle e’s in de <code>$langsteWoord</code> variable door 3's.
-                    <p class="remark">Je mag enkel gebruik maken van de variable names. De values
-                        <code>'e'</code>,
-                        <code>'3'</code> en
-                        <code>'zandzeepsodemineralenwatersteenstralen'</code> mogen in totaal maar één keer in het php-document voorkomen.
-                    </p>
+
                 </li>
                 <p>
                     <?php echo str_replace($lettertje,$cijfertje,$langsteWoord) ?>
