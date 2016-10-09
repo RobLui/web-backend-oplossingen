@@ -20,8 +20,9 @@
             <li>Maak een PHP-script dat kan bepalen of de variabele 'jaartal' al dan niet een schrikkeljaar is
                 <ul>
                     <li>Een jaar is een schrikkeljaar als het deelbaar is door 4.</li>
+                    <li>Een jaar is géén schrikkeljaar als het deelbaar is door 100, TENZIJ het wel deelbaar is door 400.</li>
                     <?php 
-                        $jaartal_dat_gechecked_moet_worden = 2000;
+                        $jaartal_dat_gechecked_moet_worden = 1420;
                         //% = modulo (rest)
                         if($jaartal_dat_gechecked_moet_worden%4 == 0 
                            && ($jaartal_dat_gechecked_moet_worden%100 != 0 
@@ -35,7 +36,6 @@
                         }
                         
                         ?>
-                        <li>Een jaar is géén schrikkeljaar als het deelbaar is door 100, TENZIJ het wel deelbaar is door 400.</li>
                 </ul>
             </li>
         </ul>
