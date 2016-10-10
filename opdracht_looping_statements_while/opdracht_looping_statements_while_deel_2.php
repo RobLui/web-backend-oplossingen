@@ -32,7 +32,6 @@ $boodschappenlijstje = ["appelen","vis","vlees","groenten","soja","boter"];
                 <?php
                         $i = 0;
                         while ($i < count($boodschappenlijstje) ): ?>
-
                     <li>
                         <?php echo $boodschappenlijstje[$i] ?>
                     </li>
