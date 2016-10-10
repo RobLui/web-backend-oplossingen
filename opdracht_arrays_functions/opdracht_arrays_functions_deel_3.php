@@ -45,6 +45,7 @@ rsort($array_zonder_dubbelen);
                     Array zonder duplicaten:
                     <?php 
                      print_r($array_zonder_dubbelen);
+                        
                         ?>
                 </p>
 
