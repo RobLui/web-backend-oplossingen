@@ -1,14 +1,5 @@
 <?php 
 
-//$array_dieren = ["kat","vis","nijlpaard","eekhoorn","giraf","olifant","hond"];
-//$aantal_dieren = count($array_dieren);
-//$teZoekenDier = "muis";
-//
-//$sorteer_dieren = sort($array_dieren);
-//$zoogdieren = ["leeuw","aap","vos"];
-//
-//$dierenlijst = array_merge($array_dieren,$zoogdieren);
-
 $array_met_waarden = [8, 7, 8, 7, 3, 2, 1, 2, 4];
 
 $array_zonder_dubbelen = array_unique($array_met_waarden);
