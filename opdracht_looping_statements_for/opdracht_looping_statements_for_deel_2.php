@@ -27,16 +27,21 @@ $tien = 10;
       ?>
           <table>
               <tr>
+                <!-- FOR -->
                   <?php for($j = 1; $j <= $tien; $j++): ?>
+                    <!-- IF -->
                     <?php if (($i * $j)%2 != 0): ?>
                       <td class="kleurklasse">
                           <?php echo $i * $j ?>
                       </td>
+                      <!-- ElSE (terwijl de if nog niet afgesloten is met "endif") -->
                     <?php else: ?>
                       <td>
                           <?php echo $i * $j ?>
                       </td>
+                      <!-- IF afgesloten -->
                     <?php endif; ?>
+                    <!--  FOR afgesloten -->
                       <?php endfor ?>
               </tr>
 
