@@ -49,5 +49,5 @@ $tien = 10;
               endfor
               ?>
           </table>
-
+        </body>
     </html>
