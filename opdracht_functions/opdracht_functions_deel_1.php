@@ -21,25 +21,18 @@ function isEven($getal){
   }
   return $true_or_false;
 }
-
 $antwoord = berekenSom(2,4);
 $antwoord_vermenigvuldiging = vermenigvuldig(5,6);
 $antwoord_even_oneven = isEven(5);
-
 $teststring = "dit is een teststring";
 
 //lengte van een array afdrukken
 $lengte_string = strlen($teststring);
 //lengte & uppercase versie afdrukken
 $string_upper = $teststring;
+//Uppercase string
 $str_to_upper = strtoupper($teststring);
-
-
 ?>
-
-
-
-
 
 <!DOCTYPE html>
 <html>
@@ -49,13 +42,8 @@ $str_to_upper = strtoupper($teststring);
   </head>
   <body>
     <p>het antwoord van de som = <?php echo $antwoord ?></p>
-      <p>het antwoord van de vermenigvuldiging = <?php echo $antwoord_vermenigvuldiging ?></p>
-<p>
-    string lengte = <?php echo $lengte_string ?>
-</p>
-<p>
-  string uppercase = <?php echo $str_to_upper?>
-</p>
-
+    <p>het antwoord van de vermenigvuldiging = <?php echo $antwoord_vermenigvuldiging ?></p>
+    <p>string lengte = <?php echo $lengte_string ?></p>
+    <p>string uppercase = <?php echo $str_to_upper?></p>
   </body>
 </html>
