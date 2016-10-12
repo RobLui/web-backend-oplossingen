@@ -7,11 +7,11 @@ $splitted = str_split($file,1);
 //sorteer Z naar A
 $sorteer_groot_naar_klein = rsort($splitted);
 //Draai de string om
-$reverse_stuff = strrev($sorteer_groot_naar_klein);
+$reversed_string = strrev($sorteer_groot_naar_klein);
 //Tel hoeveel keer een letter in de string voorkomt
-$tellen =  count_chars($reverse_stuff);
-
-
+$tellen = count_chars($reversed_string);
+//
+$array_to_add_in = array();
 
 ?>
 
@@ -23,8 +23,10 @@ $tellen =  count_chars($reverse_stuff);
   </head>
   <body>
     <?php
-
-?>
+foreach ($reversed_string as $nieuwe_naam) {
+    $array_to_add_in[$nieuwe_naam];
+}
+    ?>
 
 
 
