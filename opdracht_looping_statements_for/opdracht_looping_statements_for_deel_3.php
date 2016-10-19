@@ -25,14 +25,14 @@ $i_maal_j = array();
 
     <?php
 
-    $multi_dim_table = [ $i_maal_j => $i,$j ];
+    // $multi_dim_table = [ $i_maal_j => $i,$j ];
 
           for($i = 0; $i <= $tien; $i++):
           ?>
               <table>
                   <tr>
                     <!-- FOR -->
-                      <?php for($j = 1; $j <= $tien; $j++): ?>
+                      <?php for($j = 0; $j <= $tien; $j++): ?>
                         <!-- IF -->
                         <?php if (($i * $j)%2 != 0): ?>
                           <td class="kleurklasse">

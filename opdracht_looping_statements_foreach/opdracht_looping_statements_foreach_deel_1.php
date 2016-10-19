@@ -5,14 +5,16 @@ $file = file_get_contents("text-file.txt");
 //split alle karakters
 $splitted = str_split($file,1);
 //sorteer Z naar A
-$sorteer_groot_naar_klein = rsort($splitted);
-//Draai de string om
-$reversed_string = strrev($sorteer_groot_naar_klein);
-//Tel hoeveel keer een letter in de string voorkomt
-$tellen = count_chars($reversed_string);
-//
-$array_to_add_in = array();
 
+//Hoe komt het dat.. wanneer je hem in een andere variabele zet, ik het niet meer kan doen met array_reverse?
+rsort($splitted);
+//Draai de string om
+$reversed_array = array_reverse($splitted);
+//Tel hoeveel keer een letter in de string voorkomt
+$tellen = count($reversed_array);
+
+$array_topush_in = array();
+// $array_to_add_in = array();
 ?>
 
 <!DOCTYPE html>
@@ -23,12 +25,12 @@ $array_to_add_in = array();
   </head>
   <body>
     <?php
-foreach ($reversed_string as $nieuwe_naam) {
-    $array_to_add_in[$nieuwe_naam];
-}
+    foreach($reversed_array as $value){
+        if(!in_array($value, $array_topush_in, true)){
+            array_push($array_topush_in,$value);
+        }
+    }
+    var_dump($array_topush_in);
     ?>
-
-
-
   </body>
 </html>
