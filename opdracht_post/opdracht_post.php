@@ -1,17 +1,19 @@
 <?php
 $password = "azerty";
 $username = "Robbert";
+$message = "";
 
 if( isset( $_POST ["submit"]) )
 {
-  if( $_POST["username"] == $username && $_POST["password"] == $password )
+  if
+  ($_POST["username"] == $username && $_POST["password"] == $password)
   {
-    echo "welcome " . $username;
+    $message = "username & password match, welcome!";
+  }
+  else{
+    $message = "username & password don't match";
   }
 }
-else{
-  echo "nothing filled in";
-   var_dump($_POST["username"] );
-}
-
- ?>
+var_dump($_POST["username"] );
+var_dump($_POST["password"] );
+?>
