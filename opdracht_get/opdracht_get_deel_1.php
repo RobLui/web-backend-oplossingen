@@ -1,5 +1,4 @@
 <?php
-
 $datum = "13-10-2016";
 $inhoud_art_1 = "Dit jaar gaat de Nobelprijs voor de literatuur naar de Bob Dylan. Hij volgt de Wit-Russische onderzoekjournaliste Svetlana Aleksijevitsj op.
 Dat maakte het Nobelprijscomité in de Zweedse hoofdstad Stockholm vandaag bekend.
@@ -49,6 +48,17 @@ array(
 'beschrijving' => "afbeelding 3 beschrijving"
 ));
 
+$array_of_indexes = array();
+$false_bool = "";
+
+if (isset($_GET["id"])) {
+$false_bool = true;
+}
+
+else{
+  $false_bool = false;
+}
+
  ?>
 
 
@@ -58,25 +68,41 @@ array(
     <meta charset="utf-8">
     <title>GET opdracht</title>
     <style>
-
+    .hidden{
+      display:none;
+    }
 	</style>
   </head>
 
   <body>
-    <div class="container">
+    <div class="container <? if (!$false_bool){ echo 'hidden' } ?> ">
       <!-- <img src="images\afbeelding_1.jpg "/> -->
       <form class="" action="index.html" method="get">
       </form>
-        <?php foreach ($artikels   as $id => $artikel): ?>
+      <!--  Als de bool true is moet dit getoond worden -->
+      <?php if (!$false_bool): ?>
+        <?php foreach ($artikels as $id => $artikel): ?>
+          <!-- <p> plaats in array :
+          <?= $id  ?> // staat in commentaar
+          </p> -->
+          <?php array_push($array_of_indexes,$artikel['titel']);  ?>
+          <!-- <?= $array_of_indexes[$id]; ?> -->
           <!--  titel -->
           <h2>  <?= $artikel['titel'] ?> </h2>
           <!--  datum -->
           <p>  <?= $artikel['datum'] ?> </p>
           <!--  afbeelding -->
-          <p> </p><img src=" <?= $artikel['afbeelding']?> "/>
+          <img src=" <?= $artikel['afbeelding']?> "/>
           <!--   inhoud-->
-          <p> <?= $artikel['inhoud'] ?> </p>
+          <p> <?= substr($artikel['inhoud'],0,50) . "..."  ?> </p>
+          <a href="http://oplossingen.web-backend.local/opdracht_get/opdracht_get_deel_1.php?id=<?= $id ?>">
+             <!-- Artikel <?= $id ?>  -->
+             lees meer</a>
+             <br>
+             <br>
+             <br>
         <?php endforeach; ?>
+      <?php endif; ?>
     </div>
   </body>
 </html>
