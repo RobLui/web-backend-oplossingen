@@ -24,18 +24,30 @@ Volgens AP is het - zoals algemeen verwacht wordt - inderdaad kroonprins Maha Va
 De kroonprins is in Thaïland niet erg populair, vanwegen zijn amoureuze escapades - Vajiralongkorn is al drie keer getrouwd -
 en omdat hij het grootste deel van de tijd in Duitsland woont. Eerder werd zelfs geopperd om één van Bhumibols dochters tot koningin te kronen. ";
 
-$afbeelding_1 = "<img src =\"D:\2016-2017\2 Web-back-end\web-backend\oplossingen\web-backend-oplossingen\opdracht_get\images\\afbeelding_1";
-$afbeelding_2 = "<img src =\"D:\2016-2017\2 Web-back-end\web-backend\oplossingen\web-backend-oplossingen\opdracht_get\images\\afbeelding_2";
-$afbeelding_3 = "<img src =\"D:\2016-2017\2 Web-back-end\web-backend\oplossingen\web-backend-oplossingen\opdracht_get\images\\afbeelding_3";
+$afbeelding_1 = 'images\afbeelding_1.jpg';
+$afbeelding_2 = 'images\afbeelding_2.jpg';
+$afbeelding_3 = 'images\afbeelding_3.jpg';
 
-$artikels = array
-(
-array('titel' => "Bob Dylan wint nobelprijs voor literatuur", "Dit is het Cd&V voorstel voor de meerwaardebelasting","Thaise koning Bhumibol overleden"),
-array('datum' => $datum),
-array('inhoud' => $inhoud_art_1 ,$inhoud_art_2,$inhoud_art_3 ),
-array('afbeelding' => $afbeelding_1 , $afbeelding_2, $afbeelding_3),
-array('beschrijving' =>"afbeelding 1 beschrijving" , "afbeelding 2 beschrijving", )
-);
+$artikels = array(
+array(
+'titel' => "Bob Dylan wint nobelprijs voor literatuur",
+'datum' => $datum,
+'inhoud' => $inhoud_art_1,
+'afbeelding' => $afbeelding_1,
+'beschrijving' =>"afbeelding 1 beschrijving"),
+array(
+'titel' => "Dit is het Cd&V voorstel voor de meerwaardebelasting",
+'datum' => $datum,
+'inhoud' => $inhoud_art_2,
+'afbeelding' => $afbeelding_2,
+'beschrijving' => "afbeelding 2 beschrijving"),
+array(
+'titel' => "Thaise koning Bhumibol overleden",
+'datum' => $datum,
+'inhoud' => $inhoud_art_3,
+'afbeelding' => $afbeelding_3,
+'beschrijving' => "afbeelding 3 beschrijving"
+));
 
  ?>
 
@@ -44,24 +56,25 @@ array('beschrijving' =>"afbeelding 1 beschrijving" , "afbeelding 2 beschrijving"
 <html>
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>GET opdracht</title>
+    <style>
+
+	</style>
   </head>
 
 
   <body>
     <div class="container">
+      <!-- <img src="images\afbeelding_1.jpg "/> -->
       <form class="" action="index.html" method="get">
-
       </form>
-    <?php foreach ($artikels as $id => $artikel): ?>
-      <p>
-        <?php echo $artikel[0]; ?>
-      </p>
-    <?php endforeach; ?>
+        <?php foreach ($artikels   as $id => $artikel): ?>
+          <!--  werkt -->
+          <h2>  <?= $artikel['titel'] ?> </h2>
+          <!--  werkt -->
+          <img src=" <?= $artikel['afbeelding']?> "/>
+        <?php endforeach; ?>
     </div>
-
-
-</form>
 
   </body>
 </html>
