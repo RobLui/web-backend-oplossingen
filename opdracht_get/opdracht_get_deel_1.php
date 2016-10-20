@@ -50,6 +50,9 @@ array('beschrijving' =>"afbeelding 1 beschrijving" , "afbeelding 2 beschrijving"
 
   <body>
     <div class="container">
+      <form class="" action="index.html" method="get">
+
+      </form>
     <?php foreach ($artikels as $id => $artikel): ?>
       <p>
         <?php echo $artikel[0]; ?>
