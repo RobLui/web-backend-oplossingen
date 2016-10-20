@@ -62,19 +62,21 @@ array(
 	</style>
   </head>
 
-
   <body>
     <div class="container">
       <!-- <img src="images\afbeelding_1.jpg "/> -->
       <form class="" action="index.html" method="get">
       </form>
         <?php foreach ($artikels   as $id => $artikel): ?>
-          <!--  werkt -->
+          <!--  titel -->
           <h2>  <?= $artikel['titel'] ?> </h2>
-          <!--  werkt -->
-          <img src=" <?= $artikel['afbeelding']?> "/>
+          <!--  datum -->
+          <p>  <?= $artikel['datum'] ?> </p>
+          <!--  afbeelding -->
+          <p> </p><img src=" <?= $artikel['afbeelding']?> "/>
+          <!--   inhoud-->
+          <p> <?= $artikel['inhoud'] ?> </p>
         <?php endforeach; ?>
     </div>
-
   </body>
 </html>
