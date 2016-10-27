@@ -49,16 +49,17 @@ array(
 ));
 
 $array_of_indexes = array();
-$false_bool = "";
+$false_bool = false;
 
 if (isset($_GET["id"])) {
-$false_bool = true;
-}
 
-else{
-  $false_bool = false;
-}
+$id = $_GET["id"];
 
+  if (isset($artikels[$id])) {
+    $false_bool = $artikels[$id];
+    // var_dump( $false_bool );
+  }
+}
  ?>
 
 
@@ -75,12 +76,13 @@ else{
   </head>
 
   <body>
-    <div class="container <? if (!$false_bool){ echo 'hidden' } ?> ">
+    <?php  ?>
+    <div class="container">
+      <?php if (!$false_bool): ?>
       <!-- <img src="images\afbeelding_1.jpg "/> -->
       <form class="" action="index.html" method="get">
       </form>
       <!--  Als de bool true is moet dit getoond worden -->
-      <?php if (!$false_bool): ?>
         <?php foreach ($artikels as $id => $artikel): ?>
           <!-- <p> plaats in array :
           <?= $id  ?> // staat in commentaar
@@ -102,7 +104,10 @@ else{
              <br>
              <br>
         <?php endforeach; ?>
-      <?php endif; ?>
+
+      <?php else: ?>
+          <h2>  <?= $false_bool['titel'] ?> </h2>
+        <?php endif; ?>
     </div>
   </body>
 </html>

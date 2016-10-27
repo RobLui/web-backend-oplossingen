@@ -1,22 +1,22 @@
 
 
 
+<!-- session_start bij elke pagina bijvoegen! -->
+
 <?php
-$POST_VAN_EMAIL = $_POST["straat"];
-$_SESSION["straat"] = $POST_VAN_EMAIL;
-//array element (1)
-$POST_VAN_NICKNAME = $_POST["nummer"];
-$_SESSION["nummer"] = $POST_VAN_NICKNAME;
+session_start();
+// var_dump( $_SESSION );
+$POST_VAN_STRAAT = $_POST["straat"];
+$POST_VAN_NUMMER = $_POST["nummer"];
+$POST_VAN_GEMEENTE = $_POST["gemeente"];
+$POST_VAN_POSTCODE = $_POST["postcode"];
 
-$POST_VAN_EMAIL = $_POST["gemeente"];
-$_SESSION["gemeente"] = $POST_VAN_EMAIL;
-//array element (1)
-$POST_VAN_NICKNAME = $_POST["postcode"];
-$_SESSION["postcode"] = $POST_VAN_NICKNAME;
+$_SESSION["straat"] = $POST_VAN_STRAAT;
+$_SESSION["nummer"] = $POST_VAN_NUMMER;
+$_SESSION["postcode"] = $POST_VAN_POSTCODE;
+$_SESSION["gemeente"] = $POST_VAN_GEMEENTE;
 
-$_NICKNAME = $POST_VAN_NICKNAME;
-
-
+$vernietig = session_destroy();
 ?>
 
 <!DOCTYPE html>
@@ -27,39 +27,43 @@ $_NICKNAME = $POST_VAN_NICKNAME;
   </head>
   <body>
 
-<form class="" action="index.html" method="post">
+<form action="overzichtspagina.php" method="post">
 
 </form>
 
   <?php
     if (isset($_SESSION["straat"])) {
-      echo $_SESSION["straat"];
+      echo $POST_VAN_STRAAT;
     }
    ?>
    <br>
    <?php
      if (isset($_SESSION["nummer"])) {
-       echo $_SESSION["nummer"];
+       echo $POST_VAN_NUMMER;
      }
    ?>
    <br>
    <?php
    if (isset($_SESSION["postcode"])) {
-     echo $_SESSION["postcode"];
+     echo $POST_VAN_GEMEENTE;
    }
    ?>
    <br>
    <?php
     if (isset($_SESSION["gemeente"])) {
-      echo $_SESSION["gemeente"];
+      echo $POST_VAN_POSTCODE;
     }
    ?>
    <br>
    <?php
      if (isset($_SESSION["nickname"])) {
-       echo $_NICKNAME ;
+       echo $_SESSION["nickname"];
      }
     ?>
-
+    <br>
+    <input type="submit" name="submit">
+    <br>
+    <br>
+    <a href="adresgegevens.php">Vernietig sessie<?php $vernietig ?></a>
   </body>
 </html>

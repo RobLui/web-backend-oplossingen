@@ -1,18 +1,33 @@
 
 
-
-
 <?php
-//array element (0)
+//session_start bij elke pagina bijvoegen!
+session_start();
+
+
 $POST_VAN_EMAIL = $_POST["email"];
-$_SESSION["email"] = $POST_VAN_EMAIL;
-//array element (1)
 $POST_VAN_NICKNAME = $_POST["nickname"];
+
+$_SESSION["email"] = $POST_VAN_EMAIL;
 $_SESSION["nickname"] = $POST_VAN_NICKNAME;
 
+//Als er een email is doorgegeven..
+if (isset($POST_VAN_EMAIL)) {
+  //dan wordt de sessie email variabele gelijk gesteld aan de waarde die in de post van de email zit
+}
+//Als er een nickname is doorgegeven..
+if (isset($POST_VAN_NICKNAME)) {
+  //dan wordt de sessie nickname variabele gelijk gesteld aan de waarde die in de post van de nickname zit
+// echo $POST_VAN_NICKNAME;
+}
+
+$email_value = "";
+
+if (isset($_SESSION["straat"])){
+   $email_value =  $_SESSION["straat"];
+ }
 
 ?>
-
 
 
 <!DOCTYPE html>
@@ -31,7 +46,7 @@ $_SESSION["nickname"] = $POST_VAN_NICKNAME;
     </p>
 
 
-    <h1>Deel2: Adresgegevens</h1>
+    <h1>Deel 2: Adresgegevens</h1>
     <form action="overzichtspagina.php" method="post">
 
       <label for="straat">Straat:</label>
@@ -41,7 +56,7 @@ $_SESSION["nickname"] = $POST_VAN_NICKNAME;
 
       <label for="nummer">Nummer:</label>
       <br>
-      <input type="text" name="nummer" value="">
+      <input type="text" name="nummer" value="<?= $email_value ?>">
       <br>
 
       <label for="gemeente">Gemeente:</label>

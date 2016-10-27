@@ -14,7 +14,7 @@ session_start();
     <title>Sessions</title>
   </head>
   <body>
-    		<h1>Deel1: registratiegegevens</h1>
+    		<h1>Deel 1: registratiegegevens</h1>
         <form action="adresgegevens.php" method="post">
           <label for="email">E-mail:</label>
           <br>
@@ -26,6 +26,5 @@ session_start();
           <br>
           <input type="submit" name="submit">
         </form>
-
   </body>
 </html>
