@@ -23,9 +23,16 @@ $_SESSION["nickname"] = $POST_VAN_NICKNAME;
   </head>
   <body>
 
+    <h1>Registratiegegevens van vorige pagina:</h1>
+    <p>
+      E-mail: <?= $_SESSION["email"];  ?>
+      <br>
+      Nickname: <?= $_SESSION["nickname"];  ?>
+    </p>
+
 
     <h1>Deel2: Adresgegevens</h1>
-    <form action="adresgegevens.php" method="post">
+    <form action="overzichtspagina.php" method="post">
 
       <label for="straat">Straat:</label>
       <br>
@@ -50,15 +57,9 @@ $_SESSION["nickname"] = $POST_VAN_NICKNAME;
       <input type="submit" name="submit">
 
     </form>
-    
-<br>
-<?php print_r($_SESSION); ?>
 
-<p>
-  <?= $_SESSION["email"]  ?>
-  <br>
-  <?= $_SESSION["nickname"]  ?>
-</p>
+<!-- <br> -->
+<!-- <?php print_r($_SESSION); ?> -->
 
   </body>
 </html>
