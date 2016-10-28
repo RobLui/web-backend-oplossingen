@@ -2,7 +2,7 @@ Niet slecht! Je komt steeds dichterbij.
 
 Het motivatie-bestand moet de volgende dingen bevatten
 
-een H2 met naam 'Waarom ik voor MT' heb gekozen
+Een H2 met naam 'Waarom ik voor MT' heb gekozen
 Schrijf hier enkele zinnen waarom je voor MT hebt gekozen
 En leg uit hoe MT deze verwachtingen heeft ingelost (of hoe niet...)
 Een H2 met tekst 'Feedback voor de cursus web backend'
@@ -14,12 +14,33 @@ En denk er aan, blijven volharden! Het groene vinkje is in zicht.
 
 Neem deze tekst over in je eigen document en schrijf onder deze tekst wat hierboven werd gevraagd.
 
-Waarom ik voor MT koos
+Waarom ik voor MT heb gekozen
+===
 
-Na het middelbaar wou ik eerst voor politie-agent gaan. Ik heb dan ook de proeven afgelegd, maar ik was hiervoor niet geslaagd. Dan heb ik lang aan het zoeken geweest naar een studierichting die ik echt interessant vond en nadat ik op de opendeurdag bij verschillende scholen en richtingen was langsgegaan wou ik MT studeren en wou ik verder gaan in Audio/Video. Vorig jaar had ik de keuze Audio/Video aangeduid en had ik hier enkele 2de-jaarsvakken van, maar toen ik dan het programmeren onder de knie kreeg vond ik het leuk en heb ik ervoor gekozen om dit jaar over te schakelen naar Web/UX.
+Ik ben begonnen met MT begonnen omdat er na mijn vorige opleiding (Jeugd en Gehandicaptenzorg in het volwassenonderwijs) een honger naar meer was.
+Meer kennis naar andere zaken in de wereld, de wereld van het internet was dit dan.. <br>
+Specifieker: websites.
+<br>
+Ik was al getriggerd voor mijn opleiding om zelf html & css te leren en genoot hier dan ook meer en meer van na een tijd, wat uiteindelijk heeft geleid tot mijn opleiding die ik nu volg :).
+MT heeft tot nu toe 75% van myn verwachtingen hiervan tot nu toe ingelost, al ben ik wel teleurgesteld dat we vanaf het begin niet de keuze hadden om WEB te volgen.
 
 Feedback voor de cursus web backend
+===
 
-Positief: De cursus begint volledig van 0 en zo kan je eigenlijk perfect aan de cursus beginnen als je nog nooit programmeren zou gehad hebben. Je herhaalt eerst de basisbegrippen zoals strings, arrays, ... alvorens je aan het moeilijkere werk begint en door deze opbouw kan je goed volgen.
+Eén heel sterk punt aan de cursus web backend:
+---
+<br>
+Super gemotiveerde docent, die klaarstaat met hulp en uitleg als je hem nodig hebt. Respect komt langs beide kanten en ik weet dit enorm te apprecieren!
 
-Negatief: Misschien hier en daar ergens toevoegen wat de veelgemaakte fouten zijn zodat men daarop kan letten.
+
+Minder sterk punt aan de cursus web backend:
+---
+<br>
+De feedbackmomenten zijn erg krap. De feedback die gegeven wordt en de vragen die beantwoord worden is enorm nuttig en handig, enkel is er weinig tijd (omwille van het aantal leerlingen dat er feedback willen krijgen)
+
+Tussen Positief en Negatief:
+---
+Ik vind de oplossingen die voorhand zijn eenerzijds positief ter controle voor jezelf, maar anderzijds een gemakkelijke manier voor mensen die er geen tijd of moeite in willen steken, om toch tot een gemaakte oefening te komen. Ik weet dat ik er zelf veel tijd en moeite heb moeten insteken en dat dit ook loont, maar denk dat er ook genoeg andere mensen die de tijd en moeite niet zo hebben willen besteden als ik.
+
+
+Dat was myn reflectiemoment t.o.v. jou Pascal.
