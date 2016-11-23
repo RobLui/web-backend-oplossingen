@@ -40,13 +40,9 @@ array(
 'text' > $inhoud_art_3,
 'tags' => "artikel 3 beschrijving"),
 );
+//
 
-if(!isset($_GET["artikel"]))
-{
-  // // ----- VRAAG PASCAL -----// // 
-  //Om een of andere reden geeft hij een error minder als ik er +1 achter voeg, anders dus 2 errors
-  $artikel = $artikels[$_GET["artikel"] +1];
-}
+// // ----- VRAAG PASCAL -----// //
 
 //Hierdoor wordt de header van de file in de index.php "geinjecteerd", wel handig om dat je zo alles in aparte delen kan zien
 include "view/partial-header.html";
