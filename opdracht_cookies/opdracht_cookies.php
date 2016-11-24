@@ -35,7 +35,7 @@ if (!$_login)
       }
     else {
     //Hier zal de cookie gelijk zijn aan false (niet bestaande)
-      print_r("Niet gelijk aan de inhoud van het textbestand");
+      // print_r("Niet gelijk aan de inhoud van het textbestand");
       setcookie("authenticated",false);
       unset($_COOKIE["authenticated"]);
       $_login = false;

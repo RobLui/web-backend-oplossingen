@@ -1,21 +1,23 @@
 <?php
 
+//class names altijd met een hoofdletter
 class Percent
 {
   public $absolute;
   public $relative;
   public $hundred;
   public $nominal;
-  public function _construct($new,$unit)
+  //construct is met dubbele __
+  public function __construct($new,$unit)
   {
   //$this gebruiken omdat de variabelen in de klasse zelf zich bevinden
-    $this -> $absolute = $new/$unit;
-    $this -> $relative = $absolute -1;
-    $this -> $hundred = $absolute * 100;
+    $this->absolute = $new/$unit;
+    $this->relative = $this->absolute -1;
+    $this->hundred = $this->absolute * 100;
 
     //groter dan 1
-    if ($this -> $absolute > 1) {
-      $this -> $nominal = 'positive';
+    if ($this ->absolute > 1) {
+      $this ->nominal = 'positive';
     }
     //gelijk aan 1
     elseif ($this -> $absolute == 1) {
