@@ -32,19 +32,19 @@ $instance_percent_class = new Percent(150,100);
   <table>
     <td>Absoluut</td>
     <td>
-      <?= $instance_percent_class->absolute?>
+      <?= $instance_percent_class->formatNumber($instance_percent_class->absolute)?>
     </td>
     <tr>
     </tr>
     <td>relatief</td>
     <td>
-      <?= $instance_percent_class->relative?>
+      <?= $instance_percent_class->formatNumber($instance_percent_class->relative)?>
     </td>
     <tr>
     </tr>
     <td>Geheel getal</td>
     <td>
-      <?= $instance_percent_class->hundred?>
+      <?= $instance_percent_class->formatNumber($instance_percent_class->hundred)?>
     </td>
     <tr>
     </tr>

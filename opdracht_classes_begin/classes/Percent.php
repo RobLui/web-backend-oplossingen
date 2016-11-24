@@ -31,7 +31,7 @@ class Percent
   // string number_format ( float $number [, int $decimals = 0 ] ) == afronden met 2 decimalen
   public function formatNumber($number)
   {
-    return number_format(number,2);
+    return number_format($number,2);
   }
 }
 
