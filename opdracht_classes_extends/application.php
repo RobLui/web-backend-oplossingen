@@ -5,15 +5,23 @@ function __autoload($className)
 {
  include('classes/' . $className . '.php');
 }
+// include('classes/zebra.php');
+// include('classes/lion.php');
 
-// ($name,$gender,$health)
+
+
+// $name,$gender,$health
 $zebra = new Animal("Zebralio","mannelijk",100);
 $eekhoorn = new Animal("Eekhornina","vrouwelijk",200);
 $beer = new Animal("BaloeDeBruineBeer","mannelijk",300);
 
-// ($name, $gender, $health, $species)
+// $name, $gender, $health, $species
 $african_lion = new Lion("Mufasa","mannelijk",1000,"African Lion");
 $north_american_lion = new Lion("Eldoradina","vrouwelijk",1000,"North American Lion")
+
+// $name, $gender, $health, $species
+$zebro_uno = new Zebra("Zebrino","mannelijk",200,"American Zebra");
+$zebra_dos = new Zebra("Zebrina","vrouwelijk",200,"Belgian Zebra");
 
  ?>
  <!DOCTYPE html>
@@ -49,6 +57,9 @@ $north_american_lion = new Lion("Eldoradina","vrouwelijk",1000,"North American L
    <p>Naam = <?= $north_american_lion->doSpecialMove() ?></p>
    <p>Soort = <?= $north_american_lion->getSpecies() ?></p>
 
+   <!--  Zebra opdracht-->
+   <p>Naam = <?= $zebro_uno->getName() ?></p>
+   <p>Soort = <?= $zebra_dos->getName() ?></p>
 
    </body>
  </html>

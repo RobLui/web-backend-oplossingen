@@ -1,6 +1,6 @@
 <?php
 
-include_once("Animal.php");
+include("Animal.php");
 
 class Lion extends Animal
 {
