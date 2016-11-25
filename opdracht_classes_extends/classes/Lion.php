@@ -1,6 +1,6 @@
 <?php
 
-include("Animal.php");
+// include("Animal.php"); -> Heb de fout gevonden, waardoor deze includes niet meer mogen !
 
 class Lion extends Animal
 {

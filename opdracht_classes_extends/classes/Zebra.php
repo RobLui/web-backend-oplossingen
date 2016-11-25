@@ -1,6 +1,6 @@
 <?php
 // Error "Animal" class could not be found weggewerkt door te includen in beide files
-include("Animal.php");
+// include("Animal.php"); -> Heb de fout gevonden, waardoor deze includes niet meer mogen !
 
 class Zebra extends Animal
 {
@@ -15,7 +15,7 @@ class Zebra extends Animal
   }
 
   // getSpecies returnt de class member species
-  function getSpecies() {
+  public function getSpecies() {
     return $this->species;
   }
   // geen doSpecialMove(), wordt al overgeerfd
