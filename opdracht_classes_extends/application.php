@@ -1,10 +1,10 @@
 <?php
 
+//Ik heb het gevoel dat de autoload niet werkt, ik moet in mijn andere functies nog "Animal.php" gaan includen
 function __autoload($className)
 {
  include('classes/' . $className . '.php');
 }
-// __autoload($animal);
 
 // ($name,$gender,$health)
 $zebra = new Animal("Zebralio","mannelijk",100);
