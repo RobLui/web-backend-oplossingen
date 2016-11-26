@@ -64,7 +64,7 @@ $zebra_dos = new Zebra("Zebrina","vrouwelijk",200,"Belgian Zebra");
    <h2>Zebra class</h2>
    <p>Naam = <?= $zebro_uno->getName() ?></p>
    <p>Soort = <?= $zebra_dos->getSpecies() ?></p>
-   <!--  doSpecialMove() kan toch worden uitgevoerd doordat deze overgeerfd wordt uit de animal class-->
+   <!--  doSpecialMove() kan toch worden uitgevoerd doordat deze overgeerfd wordt uit de animal class -->
    <p>Special move? = <?php echo $zebra_dos->doSpecialMove() ?></p>
 
 
