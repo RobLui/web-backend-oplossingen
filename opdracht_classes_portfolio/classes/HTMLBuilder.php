@@ -1,5 +1,32 @@
 <?php
 
+include("hmtl/body.partial.php");
+
+class HTMLBuilder{
+
+  protected $header;
+  protected $body;
+  protected $footer;
+
+  public function getHeader(){
+    return $this->header;
+  }
+  public function getBody(){
+    return $this->body;
+  }
+  public function getFooter(){
+      return $this->footer;
+    }
+
+public function __construct()
+  //Maak header
+  $this->getHeader();
+  //Maak body
+  $this->getBody();
+  //Maak footer
+  $this->getFooter();
+}
+
 // include '../html/body.partial.php';
 require_once("../js/script.js");
 
