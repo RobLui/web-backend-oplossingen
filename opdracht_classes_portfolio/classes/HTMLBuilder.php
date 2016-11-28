@@ -1,15 +1,25 @@
 <?php
 // include("html/body.partial.php");
+//
+// spl_autoload_register(function($class_name){
+// include "html/" . $class_name . ".php";
+// });
 include_once("../js/script.js");
 
-spl_autoload_register(function($class_name){
-include "html/" . $class_name . ".php";
-});
-
 class HTMLBuilder{
-  protected $header;
-  protected $body;
-  protected $footer;
+  function __autoload($className)
+  {
+   include_once('html/' . $className . '.php');
+  }
+  protected $header = "header.partial";
+
+  protected $body = "body.partial";
+
+  protected $footer = "footer.partial";
+
+  // __autoload(getHeader());
+  // __autoload(getBody());
+  // __autoload(getFooter());
 
   public function getHeader(){
     return $this->header;
@@ -30,8 +40,6 @@ public function __construct(){
   //Maak footer
   $this->getFooter();
 }
-
-// include '../html/body.partial.php';
 }
 ?>
 
