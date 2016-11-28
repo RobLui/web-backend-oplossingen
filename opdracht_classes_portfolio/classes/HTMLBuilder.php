@@ -1,13 +1,10 @@
 <?php
-
 // include("html/body.partial.php");
 include_once("../js/script.js");
 
 spl_autoload_register(function($class_name){
 include "html/" . $class_name . ".php";
-print_r("test");
 });
-
 
 class HTMLBuilder{
   protected $header;
