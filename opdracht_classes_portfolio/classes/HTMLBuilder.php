@@ -1,9 +1,15 @@
 <?php
 
-include("hmtl/body.partial.php");
+// include("html/body.partial.php");
+include_once("../js/script.js");
+
+spl_autoload_register(function($class_name){
+include "html/" . $class_name . ".php";
+print_r("test");
+});
+
 
 class HTMLBuilder{
-
   protected $header;
   protected $body;
   protected $footer;
@@ -18,7 +24,8 @@ class HTMLBuilder{
       return $this->footer;
     }
 
-public function __construct()
+public function __construct(){
+
   //Maak header
   $this->getHeader();
   //Maak body
@@ -28,8 +35,7 @@ public function __construct()
 }
 
 // include '../html/body.partial.php';
-require_once("../js/script.js");
-
+}
 ?>
 
 <!DOCTYPE html>
