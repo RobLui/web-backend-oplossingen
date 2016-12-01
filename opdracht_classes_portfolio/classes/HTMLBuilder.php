@@ -4,13 +4,12 @@
 // spl_autoload_register(function($class_name){
 // include "html/" . $class_name . ".php";
 // });
-include_once("../js/script.js");
 
 class HTMLBuilder{
-  function __autoload($className)
-  {
-   include('html/' . $className . '.php');
-  }
+  // function __autoload($className)
+  // {
+  //  include('html/' . $className . '.php');
+  // }
   protected $header = "header.partial";
 
   protected $body = "body.partial";
@@ -34,33 +33,13 @@ class HTMLBuilder{
 public function __construct(){
 
   //Maak header
-  $this->getHeader();
+  require_once('html/' . $this->header . '.php');
   //Maak body
-  $this->getBody();
+  require_once('html/' . $this->body . '.php');
+
   //Maak footer
-  $this->getFooter();
+  require_once('html/' . $this->footer . '.php');
+
 }
 }
 ?>
-
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>HTMLBuilder</title>
-  </head>
-  <body>
-
-    <header>
-      <h1>Portfolio</h1>
-    </header>
-
-    <div class="container">
-
-    </div>
-
-    <footer>
-
-    </footer>
-  </body>
-</html>

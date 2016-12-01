@@ -1,5 +1,11 @@
-<?php
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>HTMLBuilder</title>
+  </head>
+  <body>
 
-include_once("../js/script.js");
-
-?>
+    <header>
+      <h1>Portfolio</h1>
+    </header>
