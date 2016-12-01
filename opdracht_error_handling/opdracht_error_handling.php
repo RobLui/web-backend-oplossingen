@@ -19,15 +19,16 @@ try {
         $bericht = $_POST["code"] . " is niet lang genoeg";
       }
     }
-    else {
-      //Alles in orde, mag inloggen
-      $bericht = "Have fun logging in";
-    }
+      else {
+        //Alles in orde, mag inloggen
+        $bericht = "Have fun logging in";
+      }
     echo $bericht;
     // throw new Exception("testing out .. :)");
   }
 }
 catch (Exception $e) {
+  // var_dump($e);
   echo $e->getMessage();
 }
 
