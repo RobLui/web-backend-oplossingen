@@ -9,7 +9,7 @@ include_once("../js/script.js");
 class HTMLBuilder{
   function __autoload($className)
   {
-   include_once('html/' . $className . '.php');
+   include('html/' . $className . '.php');
   }
   protected $header = "header.partial";
 
