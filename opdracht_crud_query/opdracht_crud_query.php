@@ -29,7 +29,13 @@ try {
   // 'gemeente' => string 'Breendonk-Puurs' (length=15)    8
   // 'omzet' => string '250000' (length=6)                 9
 
-
+$waardes = array();
+while ( $rij = $db_access->fetch())
+{
+  $waardes[] =	$rij;
+  // $rij geeft de verschillende mogelijkheden terug die in de database zitten
+  // var_dump($rij);
+}
 
 }
 catch (PDOException $e) {
@@ -61,12 +67,12 @@ echo "Geen connectie met db kunnen maken: " . $e->getMessage();
   <!--  tbody komen alle gevonden resultaten -->
   <tbody>
     <!--  check dat het geen infi loop kan worden -->
-      <?php for ($i=0; $i < count($rijen); $i++): ?>
+      <?php for ($i=0; $i <= count($rijen); $i++): ?>
         <tr>
           <td> <?= $i+1; ?> </td>
-          <?php foreach ($rijen as $key => $value): ?>
+          <?php foreach ($rijen as $waarde): ?>
               <td>
-                <?= $value ?>
+                <?= $waarde ?>
               </td>
           <?php endforeach; ?>
         </tr>
