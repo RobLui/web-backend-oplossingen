@@ -1,7 +1,5 @@
 <?php
-
 try {
-
   // $array_van_bieren
   // Maakt een instantie van de PDO class
   // Maakt connectie met de lokale db
@@ -17,7 +15,6 @@ try {
   //voer deze query uit !-!-!--- LET OP DE PIJL '->' ---!-!-!
   $db_access->execute();
   // var_dump($db_access);
-
   $rijen = $db_access->fetch(PDO::FETCH_ASSOC);
 
   //  var_dump($rijen); --- ONDER DIT STAAN DE RESULTATEN DIE DE DUMP TERUG GEEFT
@@ -33,11 +30,13 @@ try {
   // 'omzet' => string '250000' (length=6)                 9
 
 
+
 }
 catch (PDOException $e) {
   // custom foutboodschap bij geen connectie met database
 echo "Geen connectie met db kunnen maken: " . $e->getMessage();
 }
+
 ?>
 
 
@@ -46,19 +45,32 @@ echo "Geen connectie met db kunnen maken: " . $e->getMessage();
   <head>
     <meta charset="utf-8">
     <title>CRUD_PAGE</title>
+    <link rel="stylesheet" href="style.css">
   </head>
   <body>
 <table>
-  <!--  thead moet de kolomnamen krijgen -->
+  <!--  thead moet de kolomnamen krijgen - key's zijn hier mijn rijnamen -->
   <thead>
+    <th><?= "#" ?></th>
     <?php foreach ($rijen as $key => $value): ?>
-      <!-- key's zijn hier mijn rijnamen -->
-      <?= $key ?>
+        <th>
+          <?= $key ?>
+        </th>
     <?php endforeach; ?>
   </thead>
   <!--  tbody komen alle gevonden resultaten -->
   <tbody>
-
+    <!--  check dat het geen infi loop kan worden -->
+      <?php for ($i=0; $i < count($rijen); $i++): ?>
+        <tr>
+          <td> <?= $i+1; ?> </td>
+          <?php foreach ($rijen as $key => $value): ?>
+              <td>
+                <?= $value ?>
+              </td>
+          <?php endforeach; ?>
+        </tr>
+      <?php endfor ?>
   </tbody>
   <!--  tfoot mag leeg blijven -->
   <tfoot>
