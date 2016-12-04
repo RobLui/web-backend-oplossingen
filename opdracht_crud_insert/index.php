@@ -1,3 +1,43 @@
+<?php
+// $result_set = $pdo->prepare("INSERT INTO `users` (`username`, `password`, `first_name`, `last_name`)
+// VALUES (:username, :password, :first_name, :last_name)");
+// $result_set->execute(array(
+//     ':username' => '~user',
+//     ':password' => '~pass',
+//     ':first_name' => '~John',
+//     ':last_name' => '~Doe'
+// ));
+try {
+  //verbinding database
+  $db = new  PDO('mysql:host=localhost;dbname=bieren', 'root','');
+  //query && zet de waardes op verschillende variabelen
+  $db_query = "INSERT INTO 'brouwers'
+  ('brnaam', 'adres', 'postcode', 'gemeente', 'omzet')
+  VALUES(:brnaam,:adres,:postcode,:gemeente,:omzet)";
+  //query in db
+  $db_access = $db->prepare($db_query);
+  //voer query in db uit , maakt gebruik van eerder gezette variabelen (in de db_query)
+  $db_access->execute(array(
+        ':brnaam' => 'testuser',
+        ':adres' => 'test adres',
+        ':postcode' => 'test postcode',
+        ':gemeente' => 'test gemeente',
+        ':omzet' => '5'
+  ));
+  // var_dump($db_access);
+}
+
+catch (PDOException $e) {
+  //foutmelding bij geen verbinding
+echo "Hier liep het fout: " . $e->getMessage();
+}
+
+
+
+
+ ?>
+
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -5,8 +45,7 @@
     <title></title>
   </head>
   <body>
-    <form class="" action="index.html" method="post">
-
+    <form class="index_post" action="index.php" method="post">
     <ul>
   <li>
     <label for="brnaam">Brouwernaam</label>
@@ -29,6 +68,8 @@
     <input type="text" name="omzet" id="omzet">
   </li>
 </ul>
+<input type="submit" value="Insert" name="submit">
+
 </form>
 
   </body>
