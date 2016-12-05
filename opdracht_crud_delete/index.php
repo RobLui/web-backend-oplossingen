@@ -10,12 +10,24 @@ try {
   $db_access = $db->prepare($db_query);
   $db_access->execute();
 
-//deze zorgt ervoor dat de "brouwernr, brnaam, adres,postcode, gemeente en omzet geselecteerd"
-  $rijen = array();
+  $veldnamen	=	array();
 
-  while ($rijen = $db_access->fetch(PDO::FETCH_ASSOC)) {
-    $rijen[] = $rij;
+  //vertrek bij 0 tot en met de lengte van de beschikbare lengte van verschillende kolommen , -- returns the number of columns in the result set --
+  for ( $i = 0; $i < $db_access->columnCount(); ++$i )
+  {
+    //meta inhoud opvragen gaat door getColumnMeta();
+    $veldnamen[]	=	$db_access->getColumnMeta( $i )['name'];
   }
+
+  //De brouwer-data ophalen
+  $alle_brouwer_data	=	array();
+
+  while( $rij_van_data = $db_access->fetch( PDO::FETCH_ASSOC ) )
+  {
+    $alle_brouwer_data[]	=	$rij_van_data;
+  }
+
+
 }
 catch (PDOException $e) {
   // Zorg ervoor dat wanneer er niet kan geconnecteerd worden met de database, er een custom foutboodschap verschijnt, inclusief de specifieke fout.
@@ -34,24 +46,35 @@ catch (PDOException $e) {
   <body>
     <!-- Bouw een <table> met de gevonden resultaten. -->
     <table>
+
       <thead>
         <th><?= "#" ?></th>
-        <?php foreach ($rijen as $key => $value): ?>
+        <!-- Laat de waarde in elk veldnaam van parameter ['name'] als hoofding van de kolom dienen -->
+        <!--  Dit zijn de waardes: brouwernr,	brnaam,	adres,	postcode,	gemeente,	omzet -->
+        <?php foreach ($veldnamen as $key => $value): ?>
             <th>
-              <?= $key ?>
+              <!--  Display deze waarde in nieuwe kolommen voor zolang er kolommen zijn-->
+              <?= $value ?>
             </th>
-        <?php endforeach; ?>
+          <?php endforeach; ?>
       </thead>
+
       <tbody>
-      			<?php foreach ($rijen as $key => $_naam): ?>
+        <!--  Maakt gebruik van alle brouwer_data en ga hierin dieper werken-->
+        <?php foreach ($alle_brouwer_data as $individu_data => $gegevens): ?>
               <tr>
-      					<td><?= ( $key + 1 ) ?></td>
-      					<td><?= $_naam ?></td>
+                <td><?= $key++ ?></td>
+                  <?php foreach ($gegevens as $waarde): ?>
+    						      <td><?= $waarde ?></td>
+    					     <?php endforeach ?>
       				</tr>
       			<?php endforeach ?>
-      </tbody>
-      <tfoot>
 
+      </tbody>
+
+
+      <tfoot>
+        <!--  Mag leeg blijven -->
       </tfoot>
     </table>
 
