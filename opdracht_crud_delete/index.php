@@ -1,5 +1,5 @@
 <?php
-// WERKT NOG NIET --- DE DELETE ABILITY
+// WERKT HALF NIET --- DE DELETE ABILITY
 
 try {
   // ----------------------------- GET EVERYTHING -----------------------------
@@ -28,30 +28,29 @@ try {
     $alle_brouwer_data[]	=	$rij_van_data;
   }
 
-  // ----------------------------- MAKE DELETE -----------------------------
-  //Check of er geledete moet worden
+   // ----------------------------- MAKE DELETE -----------------------------
 
+   // ER WORD IETS GEDELETE MAAR PAS OM DE 3 KEER IETS OFZO??????
 
-  //query to do in db
-  $db_delete_query	=	'DELETE FROM brouwers WHERE brouwernr LIKE :brouwernr';
-  //link met db
-  $db_del_access = $db->prepare($db_delete_query);
-  $db_del_access->bindValue( ':brouwernr', $_POST['delete'] );
-  //var_dump($_POST["delete"]);
-  //var_dump($db_del_access);
-
-   if (isset($_POST["delete"])) {
-  //voer uit
-   $db_del_access->execute();
+   //Als er op de delete knop wordt gedrukt..
+   if (isset($_POST["delete"]))
+   {
+    //query to do in db
+    $db_delete_query	=	'DELETE FROM brouwers WHERE brouwernr = :brouwernr ';
+    //link met db
+    $db_del_access = $db->prepare($db_delete_query);
+    var_dump($db_del_access->bindValue('brouwernr', $_POST['delete'])); //geeft boolean true terug?
+    $db_del_access->bindValue('brouwernr', $_POST['delete'] );
+    //voer uit
+    $db_del_access->execute();
+    var_dump($db_del_access);
    }
 }
 catch (PDOException $e) {
   // Zorg ervoor dat wanneer er niet kan geconnecteerd worden met de database, er een custom foutboodschap verschijnt, inclusief de specifieke fout.
   echo "Hier liep het fout: " . $e->getMessage();
 }
-
-
- ?>
+?>
 
 <!DOCTYPE html>
 <html>
@@ -75,6 +74,7 @@ catch (PDOException $e) {
               <?= $value ?>
             </th>
           <?php endforeach; ?>
+          <th>delete</th>
       </thead>
 
       <tbody>
@@ -88,12 +88,12 @@ catch (PDOException $e) {
   						      <td><?= $waarde ?></td>
   					    <?php endforeach ?>
                 <td>
-                  <button type="submit" name="delete" value=<?= $key-1 ?>>
+                    <button type="submit" name="delete" value=<?= $gegevens["brouwernr"] ?>>
               	     <img src="icon-delete.png" alt="delete button">
               	  </button>
                 </td>
               </tr>
-                   <?php endforeach ?>
+          <?php endforeach ?>
       </tbody>
     </form>
 
