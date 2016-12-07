@@ -15,27 +15,24 @@ try {
   //voer deze query uit !-!-!--- LET OP DE PIJL '->' ---!-!-!
   $db_access->execute();
   // var_dump($db_access);
-  $rijen = $db_access->fetch(PDO::FETCH_ASSOC);
 
-  //  var_dump($rijen); --- ONDER DIT STAAN DE RESULTATEN DIE DE DUMP TERUG GEEFT
-  // 'biernr' => string '454' (length=3)                   0
-  // 'naam' => string 'Duvel groen' (length=11)            1
-  // 'brouwernr' => string '74' (length=2)                 2
-  // 'soortnr' => string '15' (length=2)                   3
-  // 'alcohol' => string '7.5' (length=3)                  4
-  // 'brnaam' => string 'Moortgat' (length=8)              5
-  // 'adres' => string 'Breendonkdorp 58' (length=16)      6
-  // 'postcode' => string '2870' (length=4)                7
-  // 'gemeente' => string 'Breendonk-Puurs' (length=15)    8
-  // 'omzet' => string '250000' (length=6)                 9
+// VELDNAMEN
+  $veldnamen = array();
+  //vertrek bij 0 tot en met de lengte van de beschikbare lengte van verschillende kolommen , -- returns the number of columns in the result set --
+  for ( $i = 0; $i < $db_access->columnCount(); ++$i )
+  {
+    //meta inhoud opvragen gaat door getColumnMeta();
+    $veldnamen[]	=	$db_access->getColumnMeta( $i )['name'];
+  }
 
-$waardes = array();
-while ( $rij = $db_access->fetch())
-{
-  $waardes[] =	$rij;
-  // $rij geeft de verschillende mogelijkheden terug die in de database zitten
-  // var_dump($rij);
-}
+// DATA IN VELDEN
+  $alle_waardes = array();
+  while ( $rijen = $db_access->fetch(PDO::FETCH_ASSOC))
+  {
+    $alle_waardes[] =	$rijen;
+    // $rij geeft de verschillende mogelijkheden terug die in de database zitten
+    // var_dump($rij);
+  }
 
 }
 catch (PDOException $e) {
@@ -58,25 +55,25 @@ echo "Geen connectie met db kunnen maken: " . $e->getMessage();
   <!--  thead moet de kolomnamen krijgen - key's zijn hier mijn rijnamen -->
   <thead>
     <th><?= "#" ?></th>
-    <?php foreach ($rijen as $key => $value): ?>
+    <?php foreach ($veldnamen as $key => $hoofding): ?>
         <th>
-          <?= $key ?>
+          <?= $hoofding ?>
         </th>
     <?php endforeach; ?>
   </thead>
   <!--  tbody komen alle gevonden resultaten -->
   <tbody>
+
+    <?php foreach ($alle_waardes as $sleutel => $value): ?>
     <!--  check dat het geen infi loop kan worden -->
-      <?php for ($i=0; $i <= count($rijen); $i++): ?>
         <tr>
-          <td> <?= $i+1; ?> </td>
-          <?php foreach ($rijen as $waarde): ?>
-              <td>
-                <?= $waarde ?>
-              </td>
+          <td> <?= ++$sleutel; ?> </td>
+          <?php foreach ($value as $waarde): ?>
+              <td><?= $waarde ?></td>
           <?php endforeach; ?>
         </tr>
-      <?php endfor ?>
+    <?php endforeach; ?>
+
   </tbody>
   <!--  tfoot mag leeg blijven -->
   <tfoot>
