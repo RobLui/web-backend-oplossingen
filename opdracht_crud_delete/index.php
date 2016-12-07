@@ -81,7 +81,7 @@ catch (PDOException $e) {
         <?php foreach ($alle_brouwer_data as $individu_data => $gegevens): ?>
               <tr>
                 <td>
-                  <?= $key++ ?>
+                  <?= $individu_data++; ?>
                 </td>
                 <?php foreach ($gegevens as $waarde): ?>
   						      <td><?= $waarde ?></td>

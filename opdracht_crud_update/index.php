@@ -33,10 +33,30 @@ try {
     $db_del_access = $db->prepare($db_delete_query);
     // var_dump($db_del_access->bindValue('brouwernr', $_POST['delete'])); //geeft boolean true terug?
     $db_del_access->bindValue(':brouwernr', $_POST['delete'] );
-    //voer uit
+    // voer uit
     $db_del_access->execute();
     var_dump($db_del_access);
    }
+
+if (isset($_POST["update"])) {
+  $db_update_query	=	'UPDATE brouwers
+              SET brnaam 			=	:brnaam,
+                  adres		=	:adres,
+                  postcode	=	:postcode,
+                  gemeente	=	:gemeente,
+                  omzet		=	:omzet
+              WHERE brouwernr	= :brouwernr LIMIT 1';
+  $db_access->execute(array(
+      ':brnaam'   => $_POST[ 'brnaam' ],
+      ':adres'    => $_POST[ 'adres' ],
+      ':postcode' => $_POST[ 'postcode' ],
+      ':gemeente' => $_POST[ 'gemeente' ],
+      ':omzet'    => $_POST[ 'omzet' ],
+));
+}
+
+
+
 }
 catch (PDOException $e) {
   // Zorg ervoor dat wanneer er niet kan geconnecteerd worden met de database, er een custom foutboodschap verschijnt, inclusief de specifieke fout.
