@@ -36,10 +36,9 @@ try {
    if (isset($_POST["delete"]))
    {
     //query to do in db
-    $db_delete_query	=	'DELETE FROM brouwers WHERE brouwernr = :brouwernr ';
+    $db_delete_query	=	'DELETE FROM brouwers WHERE brouwernr = :brouwernr';
     //link met db
     $db_del_access = $db->prepare($db_delete_query);
-    var_dump($db_del_access->bindValue('brouwernr', $_POST['delete'])); //geeft boolean true terug?
     $db_del_access->bindValue('brouwernr', $_POST['delete'] );
     //voer uit
     $db_del_access->execute();
