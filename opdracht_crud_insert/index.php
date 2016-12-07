@@ -14,19 +14,19 @@ if (isset($_POST["submit"]))
 
     //voer query in db uit , maakt gebruik van eerder gezette variabelen (in de db_query)
     // --- WERKT -- QUERY zat voordien de fout in waardoor het niet werkte...
-    $db_access->execute(array(
-          ':brnaam'   => $_POST[ 'brnaam' ],
-          ':adres'    => $_POST[ 'adres' ],
-          ':postcode' => $_POST[ 'postcode' ],
-          ':gemeente' => $_POST[ 'gemeente' ],
-          ':omzet'    => $_POST[ 'omzet' ],
-    ));
+    // $db_access->execute(array(
+    //       ':brnaam'   => $_POST[ 'brnaam' ],
+    //       ':adres'    => $_POST[ 'adres' ],
+    //       ':postcode' => $_POST[ 'postcode' ],
+    //       ':gemeente' => $_POST[ 'gemeente' ],
+    //       ':omzet'    => $_POST[ 'omzet' ],
+    // ));
 
-    //Geeft waarde van de laatste geinserte id terug
-    $insertId =	$db->lastInsertId();
-    // var_dump($insertId);
+
 
     //Check of er iets inserted wordt, toon de plek van de id (vorige id + 1) waar het inserted is
+    // Aangepast - Hiermee wordt de query maar eenmalig uitgevoerd :)
+    
     if (  $db_access->execute(array(
             ':brnaam'   => $_POST[ 'brnaam' ],
             ':adres'    => $_POST[ 'adres' ],
@@ -34,6 +34,9 @@ if (isset($_POST["submit"]))
             ':gemeente' => $_POST[ 'gemeente' ],
             ':omzet'    => $_POST[ 'omzet' ],
       ))) {
+        //Geeft waarde van de laatste geinserte id terug
+        $insertId =	$db->lastInsertId();
+        // var_dump($insertId);
         echo "inserted " . ($insertId + 1);
     }
     //-----VOORBEELD ARRAY BINDING-----
