@@ -3,8 +3,26 @@
 
 try {
   // ----------------------------- GET EVERYTHING -----------------------------
+
+
+//BOVENAAN IPV ONDERAAN ... DIT MAAKT DAT DIE WEL VAN DE EERSTE MAAL WORDT GEDELETE :)
+
   // Maak een connectie met de lokale MySQL server en selecteer de database bieren
   $db = new  PDO('mysql:host=localhost;dbname=bieren', 'root','');
+  //Als er op de delete knop wordt gedrukt..
+  if (isset($_POST["delete"]))
+  {
+   //query to do in db
+   $db_delete_query	=	'DELETE FROM brouwers WHERE brouwernr = :brouwernr';
+   //link met db
+   $db_del_access = $db->prepare($db_delete_query);
+   $db_del_access->bindValue('brouwernr', $_POST['delete'] );
+   //voer uit
+   $db_del_access->execute();
+   var_dump($db_del_access);
+   // GETTEN ipv posten
+  }
+
   // Voer de volgende query uit: selecteer alles uit de tabel brouwers
   $db_query = "SELECT * FROM brouwers";
 
@@ -32,18 +50,7 @@ try {
 
    // ER WORD IETS GEDELETE MAAR PAS OM DE 3 KEER IETS OFZO??????
 
-   //Als er op de delete knop wordt gedrukt..
-   if (isset($_POST["delete"]))
-   {
-    //query to do in db
-    $db_delete_query	=	'DELETE FROM brouwers WHERE brouwernr = :brouwernr';
-    //link met db
-    $db_del_access = $db->prepare($db_delete_query);
-    $db_del_access->bindValue('brouwernr', $_POST['delete'] );
-    //voer uit
-    $db_del_access->execute();
-    var_dump($db_del_access);
-   }
+
 }
 catch (PDOException $e) {
   // Zorg ervoor dat wanneer er niet kan geconnecteerd worden met de database, er een custom foutboodschap verschijnt, inclusief de specifieke fout.
