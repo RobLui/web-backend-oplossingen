@@ -1,5 +1,8 @@
 <?php
 
+if (isset($_POST["generate_pass"])) {
+  echo "test";
+}
 function generatePassword(){
   $letters_klein = "abcdefghijklmnopqrstuvwxyz";
   $letters_groot = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
