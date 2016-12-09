@@ -24,7 +24,7 @@ if (isset($_POST["generate_pass"])) {
   $_SESSION["session_pass"] = generatePassword();
   echo "test";
   header("location:registratie-form.php");
-  var_dump(generatePassword());
+  // var_dump(generatePassword());
 }
 
 
