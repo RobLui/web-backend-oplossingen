@@ -1,8 +1,5 @@
 <?php
 
-if (isset($_POST["generate_pass"])) {
-  echo "test";
-}
 function generatePassword(){
   $letters_klein = "abcdefghijklmnopqrstuvwxyz";
   $letters_groot = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -20,5 +17,10 @@ function generatePassword(){
   //combinatie vn de 3..
   return ($password_klein . $password_numbers . $password_groot);
 }
-var_dump(generatePassword());
+
+
+if (isset($_POST["generate_pass"])) {
+  echo "test";
+  var_dump(generatePassword());
+}
 ?>
