@@ -27,5 +27,17 @@ if (isset($_POST["generate_pass"])) {
   // var_dump(generatePassword());
 }
 
+// ---------- CONTROLEER OP GELDIGHEID VAN NAAM ---------- VB W3SCHOOLS
+// $name = test_input($_POST["name"]);
+// if (!preg_match("/^[a-zA-Z ]*$/",$name)) {
+//   $nameErr = "Only letters and white space allowed";
+// }
+
+// ---------- CONTROLEER OP GELDIGHEID VAN EMAIL ---------- VB W3SCHOOLS
+// $email = test_input($_POST["email"]);
+// if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+//   $emailErr = "Invalid email format";
+// }
+
 
 ?>
