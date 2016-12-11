@@ -8,35 +8,44 @@ function generatePassword(){
   $password_klein = substr( str_shuffle( $letters_klein ), 0, 8 );
   $password_groot = substr( str_shuffle( $letters_groot ), 0, 8 );
   $password_numbers = mt_rand($min_number,$max_number);
+  $pass_shuffle = substr( str_shuffle($password_groot . $password_klein . $password_numbers),0,16);
   //kleine letters
-  var_dump($password_klein);
+  var_dump("klein pasw = " . $password_klein);
   //grote letters
-  var_dump($password_groot);
+  var_dump("groot pasw = " . $password_groot);
   //mt_rand returnt random number tss min en max
-  var_dump($password_numbers);
+  var_dump("number pasw = " . $password_numbers);
   //combinatie vn de 3..
-  return ($password_klein . $password_numbers . $password_groot);
+  var_dump("shuffled pasw = " . $pass_shuffle);
+  //return
+  return $pass_shuffle;
 }
 // ZET SESSIE PASWOORD GELIJK AAN DE WAARDE DIE UIT generatePassword() komt
 if (isset($_POST["generate_pass"])) {
-  session_start();
-  $_SESSION["session_pass"] = generatePassword();
-  // echo "test";
-  header("location:registratie-form.php");
-  // var_dump(generatePassword());
+  //start sessie - als er al geen andere sessie gestart is
+  if(session_id() == '' || !isset($_SESSION)) {
+    // start session
+    session_start();
+    //zet sessie passwoord gelijk aan wat er uit de generatePassword functie komt
+    $_SESSION["session_pass"] = generatePassword();
+    // echo "test";
+    var_dump($_SESSION["session_pass"]);
+    // header("location: http://oplossingen.web-backend.local/opdracht_security_login/login-form.php");
+  }
 }
 // ZET SESSIE EMAIL GELIJK AAN DE POST VAN EMAIL DIE ER DOOR KOMT
 if (isset($_POST["email"])) {
   // ---------- CONTROLEER OP GELDIGHEID VAN EMAIL ----------
-  //start sessie
-  session_start();
+  //start sessie - als er al geen andere sessie gestart is
+  if(session_id() == '' || !isset($_SESSION)) {
+    // start session
+    session_start();
   //zet sessie gelijk aan de post value die in email zat
   $email = $_POST["email"];
   $_SESSION["email"] = $email;
   //lokale var die we makkelijk knnen gebruiken hier
   $pasw = $_POST["password"];
   $_SESSION["password"] = $pasw;
-
   // FOUTE EMAIL FORMAT INGEVOERD
   // var_dump($email);
   if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -44,7 +53,7 @@ if (isset($_POST["email"])) {
     $emailErr = "Invalid email format";
     echo $emailErr;
     //stuur terug naar de beginpage
-    header("location: http://oplossingen.web-backend.local/opdracht_security_login/form.html");
+    // header("location: http://oplossingen.web-backend.local/opdracht_security_login/form.html"); // ****************
   }
   // JUISTE EMAIL FORMAT INGEVOERD
   else {
@@ -64,7 +73,7 @@ if (isset($_POST["email"])) {
         // Do Something If name Already Exist
         echo $row . " bestaat al in de database";
         // Stuur terug naar de form page
-        header("location: http://oplossingen.web-backend.local/opdracht_security_login/form.html");
+        // header("location: http://oplossingen.web-backend.local/opdracht_security_login/form.html"); //*****************
     }
     //BESTAAT NOG NIET IN DB .. dan mag hij aangemaakt worden
     else {
@@ -77,7 +86,7 @@ if (isset($_POST["email"])) {
                ':email' => $email,
                ':hashed_password' => $pasw));
          // Als de data in de database is gezet dan moet er naar de login-form pagina geleid worden
-         header("location: http://oplossingen.web-backend.local/opdracht_security_login/login-form.php");
+        //  header("location: http://oplossingen.web-backend.local/opdracht_security_login/login-form.php"); //************
     }
     }
     //db connectie mislukt
@@ -85,11 +94,12 @@ if (isset($_POST["email"])) {
       echo "hier liep het fout bij de verbinding " . $e->getMessage();
     }
   }
+  }
 }
 else {
   // mocht er toch nog iets anders mis lopen..
   echo "vul een juist emailadres in plox";
-  header("location: http://oplossingen.web-backend.local/opdracht_security_login/form.html");
+  // header("location: http://oplossingen.web-backend.local/opdracht_security_login/form.html"); //****************
 }
 
 try {
