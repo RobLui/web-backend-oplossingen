@@ -52,15 +52,32 @@ if (isset($_POST["email"])) {
     try {
       $db = new PDO('mysql:host=localhost;dbname=opdracht-security-login', 'root','');
       //query && zet de waardes op verschillende variabelen
-      $db_query = "INSERT INTO users (id,email,salt,hashed_password,last_login_time) VALUES(NULL, :email, salt, :hashed_password, now())";
-      // INSERT INTO `users` (`id`, `email`, `salt`, `hashed_password`, `last_login_time`)
-      // VALUES (NULL, 'robbertluit@hotmail.com', 'test', 'test', '2016-12-11');
 
-      //query in db
-      $db_access = $db->prepare($db_query);
-      $db_access->execute(array(
-             ':email' => $email,
-             ':hashed_password' => $pasw));
+    $q = $db->prepare("SELECT email FROM users WHERE email = :email LIMIT 10");
+    $q->bindValue(':email', $email);
+    $q->execute();
+
+    if ($q->rowCount() > 0){
+        $check = $q->fetch(PDO::FETCH_ASSOC);
+        $row = $check['email'];
+        // Do Something If name Already Exist
+        // bestaat al (zit in de row")
+        echo $row . " bestaat al in de database";
+    } else {
+        // Do Something If name Doesn't Exis
+        echo "Bestaat nog niet, dus wordt nu in de database bijgestoken :)";
+        $db_query = "INSERT INTO users (id,email,salt,hashed_password,last_login_time) VALUES(NULL, :email, salt, :hashed_password, now())";
+        // INSERT INTO `users` (`id`, `email`, `salt`, `hashed_password`, `last_login_time`)
+        // VALUES (NULL, 'robbertluit@hotmail.com', 'test', 'test', '2016-12-11');
+        //query in db
+        $db_access = $db->prepare($db_query);
+        $db_access->execute(array(
+               ':email' => $email,
+               ':hashed_password' => $pasw));
+         //Als de data in de database is gezet dan moet er naar de login-form pagina geleid worden
+         // header("location: http://oplossingen.web-backend.local/opdracht_security_login/login-form.php");
+    }
+
     }
     catch (PDOException $e) {
       echo "hier liep het fout bij de verbinding " . $e->getMessage();
