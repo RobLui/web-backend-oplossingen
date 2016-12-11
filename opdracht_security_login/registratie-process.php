@@ -26,14 +26,18 @@ if (isset($_POST["generate_pass"])) {
   // var_dump(generatePassword());
 }
 
+
 if (isset($_POST["email"])) {
   // ---------- CONTROLEER OP GELDIGHEID VAN EMAIL ----------
   //start sessie
   session_start();
   //zet sessie gelijk aan de post value die in email zat
-  $SESSION["email"] = $_POST["email"];
-  //lokale var die we makkelijk knnen gebruiken hier
   $email = $_POST["email"];
+  $SESSION["email"] = $email;
+  //lokale var die we makkelijk knnen gebruiken hier
+  $pasw = $_POST["password"];
+  $SESSION["password"] = $pasw;
+
   // var_dump($email);
   if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     //errorboodschap
@@ -44,7 +48,23 @@ if (isset($_POST["email"])) {
   }
   else {
     //alles juist
-    echo "welcome!";
+    echo "aangemaakt!";
+    try {
+      $db = new PDO('mysql:host=localhost;dbname=opdracht-security-login', 'root','');
+      //query && zet de waardes op verschillende variabelen
+      $db_query = "INSERT INTO users (id,email,salt,hashed_password,last_login_time) VALUES(NULL, :email, salt, :hashed_password, now())";
+      // INSERT INTO `users` (`id`, `email`, `salt`, `hashed_password`, `last_login_time`)
+      // VALUES (NULL, 'robbertluit@hotmail.com', 'test', 'test', '2016-12-11');
+
+      //query in db
+      $db_access = $db->prepare($db_query);
+      $db_access->execute(array(
+             ':email' => $email,
+             ':hashed_password' => $pasw));
+    }
+    catch (PDOException $e) {
+      echo "hier liep het fout bij de verbinding " . $e->getMessage();
+    }
   }
 }
 else{
