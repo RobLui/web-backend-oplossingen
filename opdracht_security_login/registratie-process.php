@@ -46,6 +46,7 @@ if (isset($_POST["email"])) {
   //lokale var die we makkelijk knnen gebruiken hier
   $pasw = $_POST["password"];
   $_SESSION["password"] = $pasw;
+}
   // FOUTE EMAIL FORMAT INGEVOERD
   // var_dump($email);
   if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -94,7 +95,6 @@ if (isset($_POST["email"])) {
       echo "hier liep het fout bij de verbinding " . $e->getMessage();
     }
   }
-  }
 }
 else {
   // mocht er toch nog iets anders mis lopen..
@@ -117,7 +117,6 @@ catch (PDOException $e) {
 //foutbericht
 echo "Hier liep het fout " . $e->getMessage();
 }
-
 
 
 ?>
