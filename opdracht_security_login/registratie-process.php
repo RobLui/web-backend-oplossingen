@@ -1,7 +1,10 @@
 <?php
-
-// session_start();
+session_start();
 // GENEREER PASWOORD
+
+// var om te gebruiken als foutboodschap drager
+$foutboodschap = "";
+
 function generatePassword(){
   $letters_klein = "abcdefghijklmnopqrstuvwxyz";
   $letters_groot = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -12,60 +15,62 @@ function generatePassword(){
   $password_numbers = mt_rand($min_number,$max_number);
   $pass_shuffle = substr( str_shuffle($password_groot . $password_klein . $password_numbers),0,16);
   //kleine letters
-  var_dump("klein pasw = " . $password_klein);
+  // var_dump("klein pasw = " . $password_klein);
   //grote letters
-  var_dump("groot pasw = " . $password_groot);
+  // var_dump("groot pasw = " . $password_groot);
   //mt_rand returnt random number tss min en max
-  var_dump("number pasw = " . $password_numbers);
+  // var_dump("number pasw = " . $password_numbers);
   //combinatie vn de 3..
-  var_dump("shuffled pasw = " . $pass_shuffle);
+  // var_dump("shuffled pasw = " . $pass_shuffle);
   //return
   return $pass_shuffle;
 }
-// ZET SESSIE PASWOORD GELIJK AAN DE WAARDE DIE UIT generatePassword() komt
+
+
+// ZET -----SESSIE PASWOORD----- GELIJK AAN DE WAARDE DIE UIT generatePassword() komt
+//ALS GENERATE PASS IS INGEDRUKT WORDT DAT HET PASSWOORD
 if (isset($_POST["generate_pass"])) {
-  //start sessie - als er al geen andere sessie gestart is
-  // if(session_id() == '' || !isset($_SESSION)) {
-    // start session
-    session_start();
-    //zet sessie passwoord gelijk aan wat er uit de generatePassword functie komt
-    $_SESSION["session_pass"] = generatePassword();
-    // echo "test";
-    // var_dump($_SESSION["session_pass"]);
-    header("location: http://oplossingen.web-backend.local/opdracht_security_login/registratie-form.php");
-  // }
+    //session_pass gelijk stellen aan wat er uit generatePassword() komt
+    $_SESSION["generated_pass"] = generatePassword();
+    //relocate naar reg-form.php
+    // header("location: http://oplossingen.web-backend.local/opdracht_security_login/registratie-form.php");
+    $generated_pass = $_SESSION["session_pass"];
 }
-// ZET SESSIE EMAIL GELIJK AAN DE POST VAN EMAIL DIE ER DOOR KOMT
+
+// ZET -----SESSIE PASWOORD----- GELIJK AAN DE WAARDE DIE IN PASSWOORD ZAT
+//ALS GENERATE PASS NIET IS INGEDRUKT WORDT DE POST VAN HET PASWOORD WAT JE INPUTTE HET PASWOORD
+{
+  if (isset($_POST["password"]) ) {
+    //POST van paswoord in session paswoord zetten
+    $pasw = $_POST["password"];
+    // $foutboodschap =   $pasw;
+    $_SESSION["session_pass"] = $pasw;
+  }
+}
+
+// ZET -----SESSIE EMAIL----- GELIJK AAN DE POST VAN EMAIL DIE ER DOOR KOMT
 if (isset($_POST["email"])) {
-  // ---------- CONTROLEER OP GELDIGHEID VAN EMAIL ----------
-  //start sessie - als er al geen andere sessie gestart is
-  // if(session_id() == '' || !isset($_SESSION)) {
-    // start session
-    session_start();
-  //zet sessie gelijk aan de post value die in email zat
+  //POST van email in session email zetten
   $email = $_POST["email"];
   $_SESSION["email"] = $email;
-  //lokale var die we makkelijk knnen gebruiken hier
-  $pasw = $_POST["password"];
-  $_SESSION["password"] = $pasw;
-
-  // FOUTE EMAIL FORMAT INGEVOERD
-  // var_dump($email);
+  // ---------- CONTROLEER OP GELDIGHEID VAN EMAIL ----------
+  //als het niet het juiste is..
   if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    //errorboodschap
+    //FOUTE EMAIL FORMAT INGEVOERD
     $emailErr = "Invalid email format";
-    echo $emailErr;
+    //echo foutboodschap
+    // $foutboodschap = $emailErr;
     //stuur terug naar de beginpage
     header("location: http://oplossingen.web-backend.local/opdracht_security_login/registratie-form.php"); // ****************
   }
 
   // JUISTE EMAIL FORMAT INGEVOERD
   else {
-    //alles juist
+    // alles juist
     try {
+      // db connectie
       $db = new PDO('mysql:host=localhost;dbname=opdracht-security-login', 'root','');
-      //query && zet de waardes op verschillende variabelen
-
+      // query && zet de waardes op verschillende variabelen
       $q = $db->prepare("SELECT email FROM users WHERE email = :email LIMIT 10");
       $q->bindValue(':email', $email);
       $q->execute();
@@ -74,7 +79,7 @@ if (isset($_POST["email"])) {
     if ($q->rowCount() > 0){
         $check = $q->fetch(PDO::FETCH_ASSOC);
         $row = $check['email'];
-        // Do Something If name Already Exist
+        // Do Something If name Already Exist - row geeft het email adres terug dat al bestaat
         echo $row . " bestaat al in de database";
         // Stuur terug naar de form page
         // header("location: http://oplossingen.web-backend.local/opdracht_security_login/form.html"); //*****************
@@ -82,7 +87,7 @@ if (isset($_POST["email"])) {
     //BESTAAT NOG NIET IN DB .. dan mag hij aangemaakt worden
     else {
         // Do Something If name doesn't excist yet
-        // echo $email . " bestaat nog niet, dus wordt nu in de database bijgestoken :)";
+        echo $email . " bestaat nog niet, dus wordt nu in de database bijgestoken :)";
         $db_query = "INSERT INTO users (id,email,salt,hashed_password,last_login_time) VALUES(NULL, :email, salt, :hashed_password, now())";
         //query in db
         $db_access = $db->prepare($db_query);
@@ -118,8 +123,10 @@ try {
 }
 catch (PDOException $e) {
 //foutbericht
-echo "Hier liep het fout " . $e->getMessage();
+$foutbericht =  $e->getMessage();
+// echo "Hier liep het fout " . $e->getMessage();
 }
 
+// $_SESSION["generated_pass"] = $generated_pass;
 
 ?>
