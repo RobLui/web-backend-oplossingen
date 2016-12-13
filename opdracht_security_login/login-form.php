@@ -8,6 +8,8 @@ if(isset($_SESSION))
   echo $msg . " " . $pwd;
 }
 else {
-  var_dump($_SESSION);
+  var_dump("Dit zijn alle sessions die aangemaakt zijn: " . $_SESSION);
 }
+// var_dump($_SESSION);
+
  ?>
