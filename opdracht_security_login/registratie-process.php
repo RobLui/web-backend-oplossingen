@@ -1,4 +1,6 @@
 <?php
+
+// session_start();
 // GENEREER PASWOORD
 function generatePassword(){
   $letters_klein = "abcdefghijklmnopqrstuvwxyz";
@@ -23,21 +25,21 @@ function generatePassword(){
 // ZET SESSIE PASWOORD GELIJK AAN DE WAARDE DIE UIT generatePassword() komt
 if (isset($_POST["generate_pass"])) {
   //start sessie - als er al geen andere sessie gestart is
-  if(session_id() == '' || !isset($_SESSION)) {
+  // if(session_id() == '' || !isset($_SESSION)) {
     // start session
     session_start();
     //zet sessie passwoord gelijk aan wat er uit de generatePassword functie komt
     $_SESSION["session_pass"] = generatePassword();
     // echo "test";
-    var_dump($_SESSION["session_pass"]);
-    // header("location: http://oplossingen.web-backend.local/opdracht_security_login/login-form.php");
-  }
+    // var_dump($_SESSION["session_pass"]);
+    header("location: http://oplossingen.web-backend.local/opdracht_security_login/registratie-form.php");
+  // }
 }
 // ZET SESSIE EMAIL GELIJK AAN DE POST VAN EMAIL DIE ER DOOR KOMT
 if (isset($_POST["email"])) {
   // ---------- CONTROLEER OP GELDIGHEID VAN EMAIL ----------
   //start sessie - als er al geen andere sessie gestart is
-  if(session_id() == '' || !isset($_SESSION)) {
+  // if(session_id() == '' || !isset($_SESSION)) {
     // start session
     session_start();
   //zet sessie gelijk aan de post value die in email zat
@@ -46,7 +48,7 @@ if (isset($_POST["email"])) {
   //lokale var die we makkelijk knnen gebruiken hier
   $pasw = $_POST["password"];
   $_SESSION["password"] = $pasw;
-}
+
   // FOUTE EMAIL FORMAT INGEVOERD
   // var_dump($email);
   if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -54,8 +56,9 @@ if (isset($_POST["email"])) {
     $emailErr = "Invalid email format";
     echo $emailErr;
     //stuur terug naar de beginpage
-    // header("location: http://oplossingen.web-backend.local/opdracht_security_login/form.html"); // ****************
+    header("location: http://oplossingen.web-backend.local/opdracht_security_login/registratie-form.php"); // ****************
   }
+
   // JUISTE EMAIL FORMAT INGEVOERD
   else {
     //alles juist
