@@ -3,13 +3,12 @@
 
 <head>
     <meta charset="utf-8">
-    <title>FORM LOGICA</title>
+    <title>REGISTRATIE</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <form action="registratie-process.php" method="post" class="form-wrapper">
-        <h2>Registreren</h2>
         <ul>
             <li>
                 <label for="email">E-mail</label>
@@ -43,7 +42,9 @@
         </ul>
     </form>
     <?php if(isset($_SESSION["foutboodschap"])){echo $_SESSION["foutboodschap"];} ?>
-
+<?php  session_start();
+var_dump($_SESSION)
+?>
 </body>
 
 </html>

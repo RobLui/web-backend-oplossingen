@@ -1,5 +1,8 @@
 <?php
 session_start();
+
+// ! UNSET SESSION gebruiken ipv session_destroy for next improvals
+
 // FOUTBOODSCHAP DRAGER
 $foutboodschap = "";
 // GENEREER PASWOORD FUNCTIE GENERATEPASSWORD();
@@ -38,7 +41,7 @@ if (isset($_POST["generate_pass"])) {
 }
 // ZET -----SESSIE PASWOORD----- GELIJK AAN DE WAARDE DIE IN PASSWOORD ZAT
 //ALS GENERATE PASS NIET IS INGEDRUKT WORDT DE POST VAN HET PASWOORD WAT JE INPUTTE HET PASWOORD
-if (isset($_POST["password"]) ) {
+if (isset($_POST["registreer"]) ) {
     //POST van paswoord in session paswoord zetten
     $pasw = $_POST["password"];
     // $foutboodschap =   $pasw;
