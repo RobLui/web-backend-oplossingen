@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 // FOUTBOODSCHAP DRAGER
 $foutboodschap = "";
 // GENEREER PASWOORD FUNCTIE GENERATEPASSWORD();
@@ -23,6 +22,10 @@ function generatePassword(){
   // var_dump("shuffled pasw = " . $pass_shuffle);
   //return
   return $pass_shuffle;
+}
+//ALS LOG_IN GA NAAR DE LOGIN-FORM
+if (isset($_POST["log_in"])) {
+  header("location: /opdracht_security_login/login-form.php");
 }
 // ZET -----SESSIE PASWOORD----- GELIJK AAN DE WAARDE DIE UIT generatePassword() komt
 //ALS GENERATE PASS IS INGEDRUKT WORDT DAT HET PASSWOORD
@@ -54,7 +57,7 @@ if (isset($_POST["email"])) {
     echo $emailErr;
     $foutboodschap = $emailErr;
     //stuur terug naar de beginpage
-    header("location: http://oplossingen.web-backend.local/opdracht_security_login/registratie-form.php"); // ****************
+    header("location: /opdracht_security_login/registratie-form.php"); // ****************
   }
   // JUISTE EMAIL FORMAT INGEVOERD
   else {
@@ -74,7 +77,8 @@ if (isset($_POST["email"])) {
           $check = $q->fetch(PDO::FETCH_ASSOC);
           $row = $check['email'];
           // Do Something If name Already Exist - row geeft het email adres terug dat al bestaat
-          echo $row . " bestaat al in de database";
+          // echo $row . " bestaat al in de database, do you want to login instead?";
+          echo $row . ' bestaat al in de database, do you want to login instead?<br>' .'<a href="/opdracht_security_login/login-form.php">Log in here</a>';
           // Stuur terug naar de form page
           // header("location: http://oplossingen.web-backend.local/opdracht_security_login/form.html"); //*****************
       }
@@ -121,5 +125,4 @@ catch (PDOException $e){
 $foutbericht =  $e->getMessage();
 echo "Hier liep het fout " . $e->getMessage();
 }
-
 ?>

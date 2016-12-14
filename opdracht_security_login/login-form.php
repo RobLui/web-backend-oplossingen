@@ -25,6 +25,6 @@ else {
   header("location: http://oplossingen.web-backend.local/opdracht_security_login/registratie-form.php");
 }
 // kill sessie
-session_destroy();
+// session_destroy();
 var_dump($_COOKIE);
  ?>

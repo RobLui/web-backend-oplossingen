@@ -1,3 +1,20 @@
+body {
+    width: 900px;
+    height: 1200px;
+    margin: 0 auto;
+}
+
+label {
+    display: block;
+}
+
+.form-wrapper {
+    width: 100%;
+    padding: 10em;
+    margin: 0 auto;
+    display: block;
+}
+
 .button_styling {
     display: inline-block;
     color: #666;
@@ -5,7 +22,7 @@
     text-transform: uppercase;
     letter-spacing: 2px;
     font-size: 12px;
-    padding: 10px 30px;
+    /*padding: 10px 30px;*/
     border-radius: 5px;
     text-align: center;
     display: block;

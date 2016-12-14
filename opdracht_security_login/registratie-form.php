@@ -1,8 +1,3 @@
-<?php
-session_start();
-var_dump($_SESSION);
-?>
-
 <!DOCTYPE html>
 <html>
 
@@ -13,7 +8,7 @@ var_dump($_SESSION);
 </head>
 
 <body>
-    <form action="registratie-process.php" method="post">
+    <form action="registratie-process.php" method="post" class="form-wrapper">
         <h2>Registreren</h2>
         <ul>
             <li>
@@ -21,6 +16,7 @@ var_dump($_SESSION);
                 <input type="text" id="email" name="email">
             </li>
             <li>
+              <!--  password == NAME FOR POST-->
                 <label for="password">Paswoord</label>
                 <input type="password" id="password" name="password" value="
                 <?php
@@ -37,17 +33,14 @@ var_dump($_SESSION);
                     echo $_SESSION["session_pass"];
                   }
                 }
-
-
                 ?>">
             </li>
+            <!--  generate_pass == NAME FOR POST-->
             <button class="button_styling" type="submit" name="generate_pass">Genereer paswoord</button>
-            <input class="button_styling" type="submit" value="registreer">
+            <!--  registreer == NAME FOR POST-->
+            <input class="button_styling" type="submit" value="registreer" name="registreer">
+            <input class="button_styling" type="submit" value="log in" name="log_in">
         </ul>
-    </form>
-
-    <form action="login-form.php" method="post">
-        <input class="button_styling" type="submit" value="log in">
     </form>
     <?php if(isset($_SESSION["foutboodschap"])){echo $_SESSION["foutboodschap"];} ?>
 
