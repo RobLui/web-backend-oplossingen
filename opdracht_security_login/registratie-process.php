@@ -87,6 +87,7 @@ if (isset($_POST["email"])) {
       }
       //BESTAAT NOG NIET IN DB .. dan mag hij aangemaakt worden
       else {
+        $pasw = $_POST["password"];
           // Do Something If name doesn't excist yet
           echo $email . " bestaat nog niet, dus wordt nu in de database bijgestoken :)";
           $db_query = "INSERT INTO users (id,email,salt,hashed_password,last_login_time) VALUES(NULL, :email, salt, :hashed_password, now())";
@@ -128,4 +129,6 @@ catch (PDOException $e){
 $foutbericht =  $e->getMessage();
 echo "Hier liep het fout " . $e->getMessage();
 }
+session_unset();
+
 ?>

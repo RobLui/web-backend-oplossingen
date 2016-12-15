@@ -43,7 +43,9 @@ require_once("login-process.php");
         </ul>
     </form>
     <?php if(isset($_SESSION["foutboodschap"])){echo $_SESSION["foutboodschap"];} ?>
-
+<?php
+  session_unset();
+?>
 </body>
 
 </html>

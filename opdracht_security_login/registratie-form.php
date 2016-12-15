@@ -42,8 +42,10 @@
         </ul>
     </form>
     <?php if(isset($_SESSION["foutboodschap"])){echo $_SESSION["foutboodschap"];} ?>
-<?php  session_start();
-var_dump($_SESSION)
+<?php
+  session_start();
+  var_dump($_SESSION)
+  session_unset();
 ?>
 </body>
 

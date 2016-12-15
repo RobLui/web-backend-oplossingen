@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 // $_COOKIE["password"] = $_SESSION["password"];
 $_COOKIE["email"] = $_SESSION["email"];
 $_COOKIE["generated_pass"] = $_SESSION["generated_pass"];
@@ -29,9 +30,11 @@ if (isset($mail))
 // var_dump($mail);
 }
 else {
-  header("location: http://oplossingen.web-backend.local/opdracht_security_login/registratie-form.php");
+  header("location: registratie-form.php");
 }
 // kill sessie
 // session_destroy();
 var_dump($_COOKIE);
+session_unset();
+
  ?>
