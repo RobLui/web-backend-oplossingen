@@ -1,7 +1,10 @@
-
 <?php
-require_once("login-process.php");
-?>
+session_start();
+// verwijder alle voorgaande sessie variabelen die er ergens aangemaakt kunnen zijn
+session_unset();
+var_dump($_SESSION);
+ ?>
+
 
 <!DOCTYPE html>
 <html>
@@ -13,7 +16,7 @@ require_once("login-process.php");
 </head>
 
 <body>
-    <form action="registratie-process.php" method="post" class="form-wrapper">
+    <form action="login-process.php" method="post" class="form-wrapper">
         <ul>
             <li>
                 <label for="email">E-mail</label>
@@ -22,8 +25,7 @@ require_once("login-process.php");
             <li>
               <!--  password == NAME FOR POST-->
                 <label for="password">Paswoord</label>
-                <input type="password" id="password" name="password" value="
-                <?php
+                <input type="password" id="password" name="password" value="<?php
                 if (isset($_COOKIE["generated_pass"])) {
                   if($_COOKIE["generated_pass"] !== NULL)
                   {
@@ -42,10 +44,8 @@ require_once("login-process.php");
             <input class="button_styling" type="submit" value="log in" name="log_in">
         </ul>
     </form>
-    <?php if(isset($_SESSION["foutboodschap"])){echo $_SESSION["foutboodschap"];} ?>
-<?php
-  session_unset();
-?>
+    <?php
+    if(isset($_SESSION["errormessage"])){echo $_SESSION["errormessage"];} ?>
 </body>
 
 </html>

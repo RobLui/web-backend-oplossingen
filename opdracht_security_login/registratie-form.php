@@ -1,3 +1,11 @@
+<?php
+session_start();
+if(isset($_SESSION["foutboodschap"]))
+{
+  echo "<br>" . $_SESSION["foutboodschap"];
+}
+var_dump($_SESSION);
+?>
 <!DOCTYPE html>
 <html>
 
@@ -17,16 +25,15 @@
             <li>
               <!--  password == NAME FOR POST-->
                 <label for="password">Paswoord</label>
-                <input type="password" id="password" name="password" value="
-                <?php
+                <input type="password" id="password" name="password" value="<?php
                 if (isset($_SESSION["generated_pass"])) {
                   if($_SESSION["generated_pass"] !== NULL)
                   {
                     echo $_SESSION["generated_pass"];
+                    session_unset();
                   }
                 }
-                else
-                {
+                else{
                 if(isset($_SESSION["session_pass"]))
                   {
                     echo $_SESSION["session_pass"];
@@ -38,15 +45,7 @@
             <button class="button_styling" type="submit" name="generate_pass">Genereer paswoord</button>
             <!--  registreer == NAME FOR POST-->
             <input class="button_styling" type="submit" value="registreer" name="registreer">
-            <input class="button_styling" type="submit" value="log in" name="log_in">
         </ul>
     </form>
-    <?php if(isset($_SESSION["foutboodschap"])){echo $_SESSION["foutboodschap"];} ?>
-<?php
-  session_start();
-  var_dump($_SESSION)
-  session_unset();
-?>
 </body>
-
 </html>

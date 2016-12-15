@@ -1,22 +1,13 @@
-body {
-    width: 900px;
-    height: 1200px;
-    margin: 0 auto;
-}
-
 label {
     display: block;
 }
 
-.form-wrapper {
-    width: 100%;
-    padding: 10em;
+.wrapper {
+    width: 960px;
     margin: 0 auto;
-    display: block;
 }
 
 .button_styling {
-    display: inline-block;
     color: #666;
     background-color: #eee;
     text-transform: uppercase;
@@ -25,9 +16,9 @@ label {
     /*padding: 10px 30px;*/
     border-radius: 5px;
     text-align: center;
+    /*height: 50px;
+    width: 225px;*/
     display: block;
-    height: 50px;
-    width: 225px;
 }
 
 .button_styling:hover {
@@ -37,7 +28,7 @@ label {
 }
 
 input[type=text], input[type=password] {
-    width: 20%;
+    width: 30%;
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;

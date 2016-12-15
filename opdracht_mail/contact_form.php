@@ -25,9 +25,11 @@
     <?php
     session_start();
     // var_dump($_SESSION);
-    if (isset($_SESSION["errormessage"])) {
-      echo $_SESSION["errormessage"];
-    }
+    // if (isset($_SESSION["errormessage"])) {
+    //   echo $_SESSION["errormessage"];
+    // }
+    unset($_SESSION["errormessage"]);
+    session_unset($_SESSION["errormessage"]);
     ?>
   </body>
 </html>

@@ -10,5 +10,5 @@ if (isset($_POST["email"])) {
 $_SESSION["errormessage"] = "";
 
 // $_POST["submit"];
-
+unset($_SESSION);
  ?>

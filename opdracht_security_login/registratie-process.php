@@ -3,8 +3,10 @@ session_start();
 
 // ! UNSET SESSION gebruiken ipv session_destroy for next improvals
 
+
+  # code...
 // FOUTBOODSCHAP DRAGER
-$foutboodschap = "";
+$_SESSION["foutboodschap"] = "";
 // GENEREER PASWOORD FUNCTIE GENERATEPASSWORD();
 function generatePassword(){
   $letters_klein = "abcdefghijklmnopqrstuvwxyz";
@@ -26,21 +28,22 @@ function generatePassword(){
   //return
   return $pass_shuffle;
 }
-//ALS LOG_IN GA NAAR DE LOGIN-FORM
-if (isset($_POST["log_in"])) {
-  header("location: /opdracht_security_login/login-form.php");
-}
 // ZET -----SESSIE PASWOORD----- GELIJK AAN DE WAARDE DIE UIT generatePassword() komt
 //ALS GENERATE PASS IS INGEDRUKT WORDT DAT HET PASSWOORD
 if (isset($_POST["generate_pass"])) {
     //session_pass gelijk stellen aan wat er uit generatePassword() komt
-    $_SESSION["generated_pass"] = generatePassword();
-    //relocate naar reg-form.php
+    if ($_POST["generate_pass"] == NULL || $_POST["generate_pass"] == "")
+    {
+      $_SESSION["generated_pass"] = generatePassword();
+      $generated_pass = $_SESSION["generated_pass"];
+    }
+    else {
+      $_SESSION["foutboodschap"] = "geef een correct emailadres mee";
+    }
+    // relocate naar reg-form.php
     // header("location: http://oplossingen.web-backend.local/opdracht_security_login/registratie-form.php");
-    $generated_pass = $_SESSION["session_pass"];
 }
 // ZET -----SESSIE PASWOORD----- GELIJK AAN DE WAARDE DIE IN PASSWOORD ZAT
-//ALS GENERATE PASS NIET IS INGEDRUKT WORDT DE POST VAN HET PASWOORD WAT JE INPUTTE HET PASWOORD
 if (isset($_POST["registreer"]) ) {
     //POST van paswoord in session paswoord zetten
     $pasw = $_POST["password"];
@@ -55,10 +58,10 @@ if (isset($_POST["email"])) {
   //als het niet het juiste is..
   if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     //FOUTE EMAIL FORMAT INGEVOERD
-    $emailErr = "Invalid email format";
+    $emailErr = "Fout email formaat ingegeven";
     //echo foutboodschap
-    echo $emailErr;
-    $foutboodschap = $emailErr;
+    // echo $emailErr;
+    $_SESSION["foutboodschap"] = $emailErr;
     //stuur terug naar de beginpage
     header("location: /opdracht_security_login/registratie-form.php"); // ****************
   }
@@ -81,7 +84,7 @@ if (isset($_POST["email"])) {
           $row = $check['email'];
           // Do Something If name Already Exist - row geeft het email adres terug dat al bestaat
           // echo $row . " bestaat al in de database, do you want to login instead?";
-          echo $row . ' bestaat al in de database, do you want to login instead?<br>' .'<a href="/opdracht_security_login/login-form.php">Log in here</a>';
+          echo $row . ' bestaat al in de database, do you want to login instead?<br>' . '<br><a href="/opdracht_security_login/login-form.php">Log in here</a>';
           // Stuur terug naar de form page
           // header("location: http://oplossingen.web-backend.local/opdracht_security_login/form.html"); //*****************
       }
@@ -89,7 +92,7 @@ if (isset($_POST["email"])) {
       else {
         $pasw = $_POST["password"];
           // Do Something If name doesn't excist yet
-          echo $email . " bestaat nog niet, dus wordt nu in de database bijgestoken :)";
+          echo $email . " bestaat nog niet, dus wordt nu in de database bijgestoken :)" . '<br><br><a href="/opdracht_security_login/login-form.php">Log in</a>';
           $db_query = "INSERT INTO users (id,email,salt,hashed_password,last_login_time) VALUES(NULL, :email, salt, :hashed_password, now())";
           //query in db
           $db_access = $db->prepare($db_query);
@@ -102,15 +105,15 @@ if (isset($_POST["email"])) {
     }
     // DB CONNECTIE FAILED - VANG OP
     catch (PDOException $e) {
-      echo "hier liep het fout bij de verbinding " . $e->getMessage();
+      $_SESSION["foutboodschap"] =  "hier liep het fout bij de verbinding " . $e->getMessage();
     }
   }
 }
 // NOG GEEN EMAIL POST GEBEURD HOE DAN OOK..
 else {
   // mocht er toch nog iets anders mis lopen..
-  echo "vul een juist emailadres in plox";
-  // header("location: http://oplossingen.web-backend.local/opdracht_security_login/form.html"); //****************
+  $_SESSION["foutboodschap"] = "geef iets deftig in..";
+  header("location:  /opdracht_security_login/registratie-form.php");//****************
 }
 // DATABASE STUFF
 try {
@@ -126,9 +129,14 @@ try {
 }
 catch (PDOException $e){
 //foutbericht
-$foutbericht =  $e->getMessage();
-echo "Hier liep het fout " . $e->getMessage();
+$_SESSION["foutboodschap"] =  $e->getMessage();
+echo $foutboodschap;
 }
-session_unset();
 
+if ($_POST["password"] != NULL && $_POST["password"] != NULL){
+
+}
+
+var_dump($_SESSION);
+// unset($_SESSION);
 ?>
