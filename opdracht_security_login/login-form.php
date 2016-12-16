@@ -1,7 +1,6 @@
 <?php
 session_start();
-var_dump($_SESSION["boodschap"]);
-var_dump($_SESSION);
+// var_dump($_SESSION);
 
  ?>
 <!DOCTYPE html>
@@ -28,3 +27,9 @@ var_dump($_SESSION);
     </form>
 </body>
 </html>
+<?php
+if (isset($_SESSION["boodschap"]))
+{
+  echo $_SESSION["boodschap"];
+}
+?>

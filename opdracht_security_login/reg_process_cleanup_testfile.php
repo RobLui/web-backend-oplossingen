@@ -57,14 +57,19 @@ if (isset($_POST["registreer"])) {
 
             // Do Something If name doesn't excist yet
             $_SESSION["boodschap"] = $email . " bestaat nog niet, dus wordt nu in de database bijgestoken :)";
-            $db_query = "INSERT INTO users (id,email,salt,hashed_password,last_login_time) VALUES(NULL, :email, salt, :hashed_password, now())";
+            $db_query = "INSERT INTO users (id,email,salt,hashed_password,last_login_time) VALUES(NULL, :email, :salt, :hashed_password, now())";
             //query in db
             $db_access = $db->prepare($db_query);
             $db_access->execute(array(
                    ':email' => $email,
-                   ':hashed_password' => $hashed_pasw));
+                   ':hashed_password' => $hashed_pasw,
+                   ':salt' => $random_salt));
 
-                   header("location: /opdracht_security_login/login-form.php");
+            $concat_mail_komma = $email . ",";
+            $hashed_mail = hash("sha512", ($email . $random_salt)); //hash paswoord van de combinatie (posted paswoord & random salt) //  cookie
+            $ttl_concat_hash_mail = $concat_mail_komma . $hashed_mail; //  cookie
+            setcookie("login", $ttl_concat_hash_mail, time() + (86400 * 30) ); //  cookie
+            header("location: /opdracht_security_login/dashboard.php"); //relocate to dashboard met gesette cookie
         }
       }
       catch (PDOException $e) {   // DB CONNECTIE FAILED - VANG OP
