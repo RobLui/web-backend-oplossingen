@@ -28,10 +28,4 @@ var_dump($mail);
 else {
   header("location: login-form.php");
 }
-// kill sessie
-// session_destroy();
-var_dump($_COOKIE);
-var_dump($_SESSIOn);
-// session_unset();
-
  ?>

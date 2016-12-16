@@ -1,10 +1,6 @@
 <?php
 session_start();
-if(isset($_SESSION["foutboodschap"]))
-{
-  echo "<br>" . $_SESSION["foutboodschap"];
-}
-var_dump($_SESSION);
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -16,30 +12,16 @@ var_dump($_SESSION);
 </head>
 
 <body>
-    <form action="registratie-process.php" method="post" class="form-wrapper">
+    <form action="reg_process_cleanup_testfile.php" method="post">
         <ul>
             <li>
                 <label for="email">E-mail</label>
-                <input type="text" id="email" name="email">
+                <input type="text" id="email" name="email" value="<?php if (isset($_SESSION["email"])){echo $_SESSION["email"];}?>">
             </li>
             <li>
               <!--  password == NAME FOR POST-->
                 <label for="password">Paswoord</label>
-                <input type="password" id="password" name="password" value="<?php
-                if (isset($_SESSION["generated_pass"])) {
-                  if($_SESSION["generated_pass"] !== NULL)
-                  {
-                    echo $_SESSION["generated_pass"];
-                    session_unset();
-                  }
-                }
-                else{
-                if(isset($_SESSION["session_pass"]))
-                  {
-                    echo $_SESSION["session_pass"];
-                  }
-                }
-                ?>">
+                <input type="password" id="password" name="session_pass" value="<?php if (isset($_SESSION["session_pass"])){echo $_SESSION["session_pass"];}?>">
             </li>
             <!--  generate_pass == NAME FOR POST-->
             <button class="button_styling" type="submit" name="generate_pass">Genereer paswoord</button>
@@ -49,3 +31,10 @@ var_dump($_SESSION);
     </form>
 </body>
 </html>
+<?php
+if(isset($_SESSION["boodschap"]))
+{
+  echo "<br>" . $_SESSION["boodschap"];
+}
+var_dump($_SESSION);
+?>

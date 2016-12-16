@@ -1,11 +1,9 @@
 <?php
 session_start();
-// verwijder alle voorgaande sessie variabelen die er ergens aangemaakt kunnen zijn
-session_unset();
+var_dump($_SESSION["boodschap"]);
 var_dump($_SESSION);
+
  ?>
-
-
 <!DOCTYPE html>
 <html>
 
@@ -14,38 +12,19 @@ var_dump($_SESSION);
     <title>INLOGGEN</title>
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
     <form action="login-process.php" method="post" class="form-wrapper">
         <ul>
             <li>
                 <label for="email">E-mail</label>
-                <input type="text" id="email" name="email">
+                <input type="text" id="email" name="email_login">
             </li>
             <li>
-              <!--  password == NAME FOR POST-->
                 <label for="password">Paswoord</label>
-                <input type="password" id="password" name="password" value="<?php
-                if (isset($_COOKIE["generated_pass"])) {
-                  if($_COOKIE["generated_pass"] !== NULL)
-                  {
-                    echo $_SESSION["generated_pass"];
-                  }
-                }
-                else
-                {
-                if(isset($_COOKIE["session_pass"]))
-                  {
-                    echo $_COOKIE["session_pass"];
-                  }
-                }
-                ?>">
+                <input type="password" id="password" name="pwd_login" value="">
             </li>
             <input class="button_styling" type="submit" value="log in" name="log_in">
         </ul>
     </form>
-    <?php
-    if(isset($_SESSION["errormessage"])){echo $_SESSION["errormessage"];} ?>
 </body>
-
 </html>
