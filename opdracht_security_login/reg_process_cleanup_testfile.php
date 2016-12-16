@@ -36,30 +36,36 @@ if (isset($_POST["registreer"])) {
       $email = $_POST["email"];
       try
       { // doe iets bij alles juist
-      $db = new PDO('mysql:host=localhost;dbname=opdracht-security-login', 'root',''); // db connectie
-      $q = $db->prepare("SELECT email FROM users WHERE email = :email LIMIT 10"); // query && zet de waardes op verschillende variabelen
-      $q->bindValue(':email', $email);
-      $q->execute();
+        $db = new PDO('mysql:host=localhost;dbname=opdracht-security-login', 'root',''); // db connectie
+        $q = $db->prepare("SELECT email FROM users WHERE email = :email LIMIT 10"); // query && zet de waardes op verschillende variabelen
+        $q->bindValue(':email', $email);
+        $q->execute();
 
-      if ($q->rowCount() > 0)   //email al in db
-      {
-          $check = $q->fetch(PDO::FETCH_ASSOC);
-          $row = $check['email'];
-          $_SESSION["boodschap"] = $row . ' bestaat al in de database, wil je anders inloggen??';
-      }
-      else //BESTAAT NOG NIET IN DB .. dan mag hij aangemaakt worden
-      {
-          $pasw = $_POST["session_pass"];
-          // Do Something If name doesn't excist yet
-          $_SESSION["boodschap"] = $email . " bestaat nog niet, dus wordt nu in de database bijgestoken :)";
-          $db_query = "INSERT INTO users (id,email,salt,hashed_password,last_login_time) VALUES(NULL, :email, salt, :hashed_password, now())";
-          //query in db
-          $db_access = $db->prepare($db_query);
-          $db_access->execute(array(
-                 ':email' => $email,
-                 ':hashed_password' => $pasw));
-      }
-      header("location: /opdracht_security_login/login-form.php");
+        if ($q->rowCount() > 0)   //email al in db
+        {
+            $check = $q->fetch(PDO::FETCH_ASSOC);
+            $row = $check['email'];
+            header("location: /opdracht_security_login/registratie-form.php");
+            $_SESSION["boodschap"] = $row . ' bestaat al in de database, wil je anders inloggen?';
+        }
+        else //BESTAAT NOG NIET IN DB .. dan mag hij aangemaakt worden
+        {
+
+            $pasw = $_POST["session_pass"];
+            $random_salt = uniqid(mt_rand(), true); //willekeurige salt string
+            $hashed_pasw = hash("sha512", ($pasw . $random_salt)); //hash paswoord van de combinatie (posted paswoord & random salt)
+
+            // Do Something If name doesn't excist yet
+            $_SESSION["boodschap"] = $email . " bestaat nog niet, dus wordt nu in de database bijgestoken :)";
+            $db_query = "INSERT INTO users (id,email,salt,hashed_password,last_login_time) VALUES(NULL, :email, salt, :hashed_password, now())";
+            //query in db
+            $db_access = $db->prepare($db_query);
+            $db_access->execute(array(
+                   ':email' => $email,
+                   ':hashed_password' => $hashed_pasw));
+
+                   header("location: /opdracht_security_login/login-form.php");
+        }
       }
       catch (PDOException $e) {   // DB CONNECTIE FAILED - VANG OP
       $_SESSION["boodschap"] =  "database error = " . $e->getMessage();

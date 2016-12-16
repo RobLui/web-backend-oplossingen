@@ -99,7 +99,8 @@ if (isset($_POST["registreer"]) ) {
 else {
   // mocht er toch nog iets anders mis lopen..
   $_SESSION["foutboodschap"] = "Er is toch nog iets anders kunnen mislopen";
-  header("location: /opdracht_security_login/registratie-form.php");
 }
+// HIER ZAT DE FOUT!!
+header("location: /opdracht_security_login/registratie-form.php");
 }
 ?>
