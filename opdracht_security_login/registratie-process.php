@@ -66,13 +66,13 @@ if (isset($_POST["registreer"]) ) {
           {
               $check = $q->fetch(PDO::FETCH_ASSOC);
               $row = $check['email'];
-              echo $row . ' bestaat al in de database, do you want to login instead?<br>' . '<br><a href="/opdracht_security_login/login-form.php">Log in here</a>'; // echo $row . " bestaat al in de database, do you want to login instead?";
+              // echo $row . ' bestaat al in de database, do you want to login instead?<br>' . '<br><a href="/opdracht_security_login/login-form.php">Log in here</a>'; // echo $row . " bestaat al in de database, do you want to login instead?";
           }
           else //BESTAAT NOG NIET IN DB .. dan mag hij aangemaakt worden
           {
               $pasw = $_POST["password"];
               // Do Something If name doesn't excist yet
-              echo $email . " bestaat nog niet, dus wordt nu in de database bijgestoken :)" . '<br><br><a href="/opdracht_security_login/login-form.php">Log in</a>';
+              // $_SESSION["boodschap"] = $email . 'bestaat nog niet, dus wordt nu in de database bijgestoken :) <br><br><a href="/opdracht_security_login/login-form.php">Log in</a>';
               $db_query = "INSERT INTO users (id,email,salt,hashed_password,last_login_time) VALUES(NULL, :email, salt, :hashed_password, now())";
               //query in db
               $db_access = $db->prepare($db_query);
@@ -98,7 +98,7 @@ if (isset($_POST["registreer"]) ) {
 // NOG GEEN EMAIL POST GEBEURD HOE DAN OOK..
 else {
   // mocht er toch nog iets anders mis lopen..
-  $_SESSION["foutboodschap"] = "Er is toch nog iets anders kunnen mislopen";
+  $_SESSION["boodschap"] = "Er is toch nog iets anders kunnen mislopen";
 }
 // HIER ZAT DE FOUT!!
 header("location: /opdracht_security_login/registratie-form.php");

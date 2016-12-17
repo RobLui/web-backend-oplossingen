@@ -1,6 +1,6 @@
 <?php
 session_start();
-session_unset();
+// session_unset();
 
 function generatePassword(){
   $letters_klein = "abcdefghijklmnopqrstuvwxyz"; //kleine letters   // var_dump("klein pasw = " . $password_klein);
@@ -46,7 +46,7 @@ if (isset($_POST["registreer"])) {
             $check = $q->fetch(PDO::FETCH_ASSOC);
             $row = $check['email'];
             header("location: /opdracht_security_login/registratie-form.php");
-            $_SESSION["boodschap"] = $row . ' bestaat al in de database, wil je anders inloggen?';
+            $_SESSION["boodschap"] = $row . ' bestaat al in de database' . '<br> <a href="/opdracht_security_login/login-form.php">Log in here </a>';
         }
         else //BESTAAT NOG NIET IN DB .. dan mag hij aangemaakt worden
         {
@@ -56,7 +56,7 @@ if (isset($_POST["registreer"])) {
             $hashed_pasw = hash("sha512", ($pasw . $random_salt)); //hash paswoord van de combinatie (posted paswoord & random salt)
 
             // Do Something If name doesn't excist yet
-            $_SESSION["boodschap"] = $email . " bestaat nog niet, dus wordt nu in de database bijgestoken :)";
+            $_SESSION["boodschap"] = $email . ' bestaat nog niet, dus wordt nu in de database bijgestoken , <br> <a href="/opdracht_security_login/login-form.php">Log in here </a>';
             $db_query = "INSERT INTO users (id,email,salt,hashed_password,last_login_time) VALUES(NULL, :email, :salt, :hashed_password, now())";
             //query in db
             $db_access = $db->prepare($db_query);
@@ -96,5 +96,6 @@ if (isset($_POST["generate_pass"])) //generatePassword used
         var_dump($_SESSION["session_pass"]);
         header("location: /opdracht_security_login/registratie-form.php");
     } //LAAT HIER STAAN !!
+    // session_unset($_SESSION["boodschap"]);
 
 ?>

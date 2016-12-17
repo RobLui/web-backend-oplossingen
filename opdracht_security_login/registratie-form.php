@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -35,5 +36,4 @@ if(isset($_SESSION["boodschap"]))
 {
   echo "<br>" . $_SESSION["boodschap"];
 }
-var_dump($_SESSION);
 ?>
