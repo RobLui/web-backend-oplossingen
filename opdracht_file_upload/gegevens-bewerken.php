@@ -56,27 +56,7 @@ if (isset($_POST["submit"])) {  //btn submit pressed
         $can_upload = 0; //can't upload
       }
 
-  if ($can_upload) //als je mag uploaden
-    {
-      try
-        {
-        //connectie met db
-        $db = new PDO('mysql:host=localhost;dbname=cmd_database_copy', 'root','');
-        //query && zet de waardes op verschillende variabelen
-        $db_query = "SELECT * FROM users";
-        //query in db
-        $db_access = $db->prepare($db_query);
-        //voer uit
-        $db_access->execute();
-        // var_dump($db_access);
-        }
-      catch (PDOException $e)
-        {
-          $_SESSION["boodschap"] = "database error = " . ($e->getMessage()); //foutbericht database
-        }
-        header("location: index.php");
-        $_SESSION["boodschap"] = "uploaded";
-    }
+
   }
 
   /* 2 */
@@ -86,7 +66,38 @@ if (isset($_POST["submit"])) {  //btn submit pressed
       if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $file_location))
       {
        // $_SESSION["show_target_file"] = is_dir($dir_location);
-       $_SESSION["boodschap"] = "The file ". basename($_FILES["fileToUpload"]["name"]). " has been uploaded.";
+       $_SESSION["boodschap"] = "The file ". basename($_FILES["fileToUpload"]["name"]). " has been uploaded."; //uploaden geslaagd -> geeft weer welke file geupload is
+      try
+        {
+        $testemail = "test@test.email";
+        $testpassword = "test@test.password";
+        $testsalt = "test@test.salt";
+        $testusertype = 1;
+        //connectie met db
+        $db = new PDO('mysql:host=localhost;dbname=cmd_database_copy', 'root','');
+        //query && zet de waardes op verschillende variabelen
+        // $db_query = "SELECT * FROM users";
+        $db_query = "INSERT INTO users (email, password, salt, user_type, date, profile_picture)
+                    VALUES(:email,:password,:salt,:user_type,:date,:profile_picture)";
+        //query in db
+        $db_access = $db->prepare($db_query);
+        //voer uit
+        $db_access->execute(array(
+                ':email'            => $testemail,
+                ':password'         => $testpassword,
+                ':salt'             => $testsalt,
+                ':user_type'        => $testusertype,
+                ':date'             => date('Y-m-d H:i:s'), //huidige tijd = deze manier van noteren om in db te uploaden
+                ':profile_picture'  => $_FILES["fileToUpload"]["tmp_name"]
+          ));
+            // $_SESSION["boodschap"] = "test upload to db";
+        }
+      catch (PDOException $e)
+        {
+          $_SESSION["boodschap"] = "database error = " . ($e->getMessage()); //foutbericht database
+        }
+        header("location: index.php");
+        // $_SESSION["boodschap"] = "uploaded";
       }
 }
 
