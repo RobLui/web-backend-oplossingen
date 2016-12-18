@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+// session_unset();
 $can_upload = 0;   // mag standaard niet uploaden, tenzij ergens gelijk aan 1 (true) wordt gezet
 // Check if image file is a actual image or fake image
 
@@ -147,6 +147,7 @@ else
       {
         echo $_SESSION["boodschap"];
       }
+      // var_dump($_SESSION); // test leeg
       ?>
   </body>
 </html>

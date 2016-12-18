@@ -15,11 +15,12 @@ if(isset($_POST['log_in']))
   {
     if (!filter_var($_POST["email_login"], FILTER_VALIDATE_EMAIL)){ //fout email formaat
     $_SESSION["boodschap"] = "Juist email formaat ingegeven aub";
-    header("location: /opdracht_security_login/login-form.php");
+    // header("location: /opdracht_security_login/login-form.php");
   }
   else
   {
-    try {
+
+  try {
 
   $email_login        = $_POST['email_login'];
   $pwd_login          = $_POST['pwd_login'];
@@ -38,31 +39,30 @@ if(isset($_POST['log_in']))
 
   $hashed_pasw_login = hash("sha512", ($pwd_login . $salt_from_db)); //hash paswoord van de combinatie (posted paswoord & random salt)
 
-  if ($q->rowCount() > 0)   //email in db
-  {
+
+  if ($q->rowCount() > 0){   //email in db
       $check = $q->fetch(PDO::FETCH_ASSOC);
       $row = $check['email'];
-      $_SESSION["boodschap"] = $row . ' bestaat in de database';
-      header("location: /opdracht_security_login/dashboard.php"); //relocate to dashboard met gesette cookie
-
-  if($email_login != $email_from_db)
-    {
-      $_SESSION['boodschap'] = "Zo is er geen email in de database";
-      header('location: login-form.php' ); //return to login-form
-    }
-  if($hashed_pass_from_db != $hashed_pasw_login)
-    {
+      // $_SESSION["boodschap"] = $row . ' bestaat in de database';
+      $_SESSION["boodschap"] = "test";
+  }else($email_login != $email_from_db){
+      // $_SESSION['boodschap'] = "Zo is er geen email in de database";
+      // header('location: login-form.php' ); //return to login-form
+    }else($hashed_pass_from_db != $hashed_pasw_login){
       // $_SESSION['boodschap'] = "concat email salt = " . $concat_email_salt . " salted email = " . $salted_email;
-      $_SESSION["boodschap"] = "hashed pass from db = " . $hashed_pass_from_db . " && hashed pass van login = " . $hashed_pasw_login;
-      header('location: login-form.php' );
-    }
-  else
+      // $_SESSION["boodschap"] = "hashed pass from db = " . $hashed_pass_from_db . " && hashed pass van login = " . $hashed_pasw_login;
+      // header('location: login-form.php' );
+    }else
     {
-      $_SESSION['boodschap'] = "ingelogd";
+      // $_SESSION['boodschap'] = "ingelogd";
+      // $_SESSION['boodschap'] = $q->rowCount();
       $cookie_val = $_SESSION["email_login"]  . "," . $salt_from_db;
       setcookie("login", $cookie_val, time() + (86400 * 30) ); //  cookie
-      header("location: /opdracht_security_login/dashboard.php"); //relocate to dashboard met gesette cookie
+      // header("location: /opdracht_security_login/dashboard.php"); //relocate to dashboard met gesette cookie
+      header("location: dashboard.php"); //relocate to dashboard met gesette cookie
     }
+  }
+
   }
 
   }
@@ -71,7 +71,7 @@ if(isset($_POST['log_in']))
   }
     }
   }
-}
-header('location: login-form.php' );
+
+// header('location: login-form.php' );
 
 ?>
