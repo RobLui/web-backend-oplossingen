@@ -16,6 +16,13 @@ session_start();
    <?php if (isset($_SESSION["boodschap"]))
      {
        echo $_SESSION["boodschap"];
-     }?>
+       echo "<br>";
+     }
+     if (isset($_SESSION["show_target_file"]))
+       {
+         echo "<br>";
+         echo $_SESSION["show_target_file"];
+       }
 
+     ?>
  </html>

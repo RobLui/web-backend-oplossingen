@@ -8,19 +8,35 @@ $can_upload = 0;   // mag standaard niet uploaden, tenzij ergens gelijk aan 1 (t
 if (isset($_POST["submit"])) {  //btn submit pressed
   if (isset($_FILES["fileToUpload"] )) //als er een file is
     {
-      $target_file = $_FILES["fileToUpload"];
-      $dir_location = "uploads/";   //dir waar de file naartoe moet geupload worden
-      $file_location = $dir_location . basename($target_file["name"]); //welk pad de file moet in terechtkomen bv: oplossingen/opdracht_file_upload/..
+      $target_file = $_FILES["fileToUpload"]["name"];
+      if (empty($target_file)) {
+        $_SESSION["boodschap"] = "No file found, pls enter a file to upload";
+        header("location: gegevens-wijzigen-form.php");
+      }
+      else
+      {
+      $_SESSION["show_target_file"] = $target_file;
+      $dir_location = "img/";   //dir waar de file naartoe moet geupload worden - deze oefening img/
+      $file_location = $dir_location . basename($target_file); //welk pad de file moet in terechtkomen bv: oplossingen/opdracht_file_upload/..
       $image_extension = pathinfo($file_location,PATHINFO_EXTENSION); //geeft de extensie van het bestand terug, gebruikt voor te checken jpeg, jpg, etc
 
       $check_upload = getimagesize($_FILES["fileToUpload"]["tmp_name"]); //check of het een image is
-      if($check_upload) // true , is een image
+      $file_size = $_FILES["fileToUpload"]["size"];
+
+      if ($file_size > 2048) { // 2 mb = 2048 kb
+        $_SESSION["boodschap"] = "The file is too large";
+        $can_upload = 0;
+      }
+      if($check_upload) // true, is een image
       {
           $_SESSION["boodschap"] =  "File is an image - " . $check_upload["mime"]; //mime geeft de soort extentie terug in woorden (image/jpeg) in dit geval bij bv jpg extentie
           $can_upload = 1; //mag uploaden
-      } else {
+      }
+      else // false, is een andere soort extentie - laat zien de welke
+      {
           $_SESSION["boodschap"] = "Wrong file extention - " . $image_extension; // geeft weer welke file extention het dan wel is als het niet jpeg/img is
           $can_upload = 0; //mag niet uploaden
+          header("location: gegevens-wijzigen-form.php");
       }
       $error_files_lvl = false;
 
@@ -61,6 +77,12 @@ if (isset($_POST["submit"])) {  //btn submit pressed
         header("location: index.php");
         $_SESSION["boodschap"] = "uploaded";
     }
+  }
+}
+
+  else{
+    echo "upload een file plox";
+    header("location: gegevens-bewerken.php");
   }
   // header("location: gegevens-wijzigen-form.php");
   // Als het bestand voldoet aan de voorwaarden moet de bestandsnaam als volgt worden samengesteld: timestamp_bestandsnaam.extensie
