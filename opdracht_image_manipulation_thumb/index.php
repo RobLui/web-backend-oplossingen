@@ -60,32 +60,36 @@ if (isset($_POST["submit"])) {  //btn submit pressed
   /* 2 */
   if (is_dir($dir_location) && $can_upload) //check for the directory waar je moet in uploaden bestaat // $_FILES-niveau geen errors geeft 1 als het bestaat
     {
+
+      $filename = $_FILES["fileToUpload"]["tmp_name"];
+
       /* 3 */
-      if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $file_location))
+      if (move_uploaded_file($filename, $file_location))
       {
        // $_SESSION["show_target_file"] = is_dir($dir_location);
        $_SESSION["boodschap"] = "The file ". basename($_FILES["fileToUpload"]["name"]). " has been uploaded."; //uploaden geslaagd -> geeft weer welke file geupload is
-       //    IMAGE LANDSCAPE OR PORTRAIT
-       list($width, $height) = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-       /* 3 */
+
+       // IMAGE LANDSCAPE OR PORTRAIT
+       /* 4 */
        if ($width > $height)
        {
            // Landscape
-           $_SESSION["boodschap"] = "landscape";
+          //  $_SESSION["boodschap"] = "landscape";
        }
-       /* 3 */
+       /* 4 */
        else
        {
            // Portrait or Square
-           $_SESSION["boodschap"] = "portrait";
+          //  $_SESSION["boodschap"] = "portrait";
        }
+      }
       try
         {
         $testemail = "test@test.email";
         $testpassword = "test@test.password";
         $testsalt = "test@test.salt";
         $testusertype = 1;
-        //connectie met db
+        // connectie met db
         $db = new PDO('mysql:host=localhost;dbname=cmd_database_copy', 'root','');
         //query && zet de waardes op verschillende variabelen
         // $db_query = "SELECT * FROM users";
@@ -100,7 +104,7 @@ if (isset($_POST["submit"])) {  //btn submit pressed
                 ':salt'             => $testsalt,
                 ':user_type'        => $testusertype,
                 ':date'             => date('Y-m-d H:i:s'), //huidige tijd = deze manier van noteren om in db te uploaden
-                ':profile_picture'  => $_FILES["fileToUpload"]["tmp_name"]
+                ':profile_picture'  => basename($_FILES["fileToUpload"]["name"])
           ));
             // $_SESSION["boodschap"] = "test upload to db";
         }
@@ -111,7 +115,7 @@ if (isset($_POST["submit"])) {  //btn submit pressed
         header("location: index.php");
         // $_SESSION["boodschap"] = "uploaded";
       }
-}
+    }
 
 /* 1 */
 else
@@ -123,7 +127,6 @@ else
   // header("location: gegevens-wijzigen-form.php");
   // Als het bestand voldoet aan de voorwaarden moet de bestandsnaam als volgt worden samengesteld: timestamp_bestandsnaam.extensie
 }
-  }
 
 ?>
 
