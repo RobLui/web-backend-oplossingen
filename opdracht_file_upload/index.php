@@ -1,8 +1,7 @@
 <?php
 session_start();
-unset($_SESSION);
- ?>
- 
+?>
+
  <!DOCTYPE html>
  <html>
    <head>
@@ -13,4 +12,10 @@ unset($_SESSION);
      <a href="gegevens-wijzigen-form.php">Gegevens wijzigen</a>
      <a href="#"></a>
    </body>
+
+   <?php if (isset($_SESSION["boodschap"]))
+     {
+       echo $_SESSION["boodschap"];
+     }?>
+
  </html>

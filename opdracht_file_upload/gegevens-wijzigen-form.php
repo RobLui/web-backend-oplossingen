@@ -10,11 +10,14 @@ session_start();
   <body>
     <form action="gegevens-bewerken.php" method="post" enctype="multipart/form-data">
       <label for="file">Bestand:</label>
-      <input type="file" name="file" id="file">
+      <input type="file" name="fileToUpload" id="file">
       <input type="submit" name="submit" value="Submit">
     </form>
-    <?php if (isset($_SESSION["boodschap"])) {
-      echo $_SESSION["boodschap"];
-    } ?>
+    <?php
+    if (isset($_SESSION["boodschap"]))
+      {
+        echo $_SESSION["boodschap"];
+      }
+      ?>
   </body>
 </html>
