@@ -15,7 +15,7 @@ if(isset($_POST['log_in']))
   {
     if (!filter_var($_POST["email_login"], FILTER_VALIDATE_EMAIL)){ //fout email formaat
     $_SESSION["boodschap"] = "Juist email formaat ingegeven aub";
-    // header("location: /opdracht_security_login/login-form.php");
+    // header("location: login-form.php");
   }
   else
   {
@@ -62,14 +62,14 @@ if(isset($_POST['log_in']))
       // $_SESSION['boodschap'] = $q->rowCount();
       $cookie_val = $_SESSION["email_login"]  . "," . $salt_from_db;
       setcookie("login", $cookie_val, time() + (86400 * 30) ); //  cookie
-      // header("location: /opdracht_security_login/dashboard.php"); //relocate to dashboard met gesette cookie
+      // header("location: dashboard.php"); //relocate to dashboard met gesette cookie
       header("location: dashboard.php"); //relocate to dashboard met gesette cookie
     }
   }
 
   }
   catch (Exception $e) {
-    $_SRSSION["boodschap"] = $e->getMessage();
+    $_SESSION["boodschap"] = $e->getMessage();
   }
     }
   }
