@@ -35,7 +35,7 @@ if(isset($_SESSION["foutboodschap"])){
       <input type="email" name="email" class="style-email" value="<?php if (isset($_SESSION["email"])){echo $_SESSION["email"];} ?>">
       <label for="boodschap">Boodschap:</label>
       <input type="text" name="boodschap" class="style-boodschap" value="<?php if(isset($_SESSION["boodschap"])){echo $_SESSION["boodschap"];} ?>">
-      <input type="checkbox" name="mail_copy" >Stuur een kopie naar mezelf<br>
+      <input type="checkbox" name="checkbox" >Stuur een kopie naar mezelf<br>
       <button type="submit" name="verzenden" class="style-sumbit">verzenden</button>
     </form>
   </body>

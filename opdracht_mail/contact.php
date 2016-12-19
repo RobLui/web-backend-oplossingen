@@ -20,22 +20,31 @@ if (isset($_POST["verzenden"])) {
     $_SESSION["foutboodschap"] = "Geen email ingevuld";
     $_SESSION["foutboodschap"] = "Geen boodschap ingevuld";
   }
+
+  try {
+      $db   = new PDO('mysql:host=localhost;dbname=contact_database', 'root',''); // db connectie
+      $db_query = "INSERT INTO contact_messages
+                  (id,email,message,time_sent) VALUES
+                  (NULL, :email, :message, now())";
+      //query in db
+      $db_access = $db->prepare($db_query);
+      $db_access->execute(array(
+             ':email' => $email_data,
+             ':message' => $boodschap_data));
+  }
+  catch (PDOException $e) {
+    $_SESSION["foutboodschap"] = $e->getMessage();
+  }
 }
 var_dump($_SESSION);
 
-try {
-    $db   = new PDO('mysql:host=localhost;dbname=contact_database', 'root',''); // db connectie
-    $db_query = "INSERT INTO contact_messages
-                (id,email,message,time_sent) VALUES
-                (NULL, :email, :message, now())";
-    //query in db
-    $db_access = $db->prepare($db_query);
-    $db_access->execute(array(
-           ':email' => $email_data,
-           ':message' => $boodschap_data));
-}
-catch (PDOException $e) {
-  $_SESSION["foutboodschap"] = $e->getMessage();
+if ($_POST["checkbox"] == "on")
+{
+
+  // if (false === mail($admin_robbert,"test",$boodschap_data)) { //check of de mail verzonden is
+  //    echo "Mail was not sent";
+  // }
+
 }
 
 ?>
