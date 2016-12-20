@@ -42,13 +42,14 @@ if(isset($_SESSION["foutboodschap"])){
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script> <!-- jQuery library toevoegen -->
     <script type="text/javascript">
-      // window.onload($('#test_echo').append('Robbert :)')); //test of jquery ingeladen is en werkt
-      $(document).ready(function() { // Handler for .ready() called
-        // let form_data = $( "#email_form" ).submit(); // alles
-        // let form_input= $( "#email_form :input" ); // alle input
-        // let form_submit= $( "#email_form :submit" ); // alle input
-        // console.log(form_submit);
-      });
+      $(document).ready(function(){ // Handler for .ready() called
+        // let form_input= $( "#email_form :input" ); // input
+        // let form_submit= $( "#email_form :submit" ); // submit
+        let form_data = $("#email_form").submit(function(){ // alles
+      } //hoort bij de .submit
+    ) //hoort bij de .submit
+  } //hoort bij de .ready
+); //hoort bij de .ready
     </script>
   </body>
 </html>
