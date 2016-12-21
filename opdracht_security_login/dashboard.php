@@ -29,11 +29,13 @@ try {
       // var_dump($hash_to_check);
       if ($hash_to_check == $email_with_hash) {
         echo "Ingelogd! <br> <br> <br>";
-        echo "<a href= /opdracht_security_login/login-form.php>Uitloggen</a>";
+        echo "<a href= /login-form.php>Uitloggen</a>";
+        // /opdracht_security_login
       }
       else {
         unset($_COOKIE["login"]);
-        header("location: /opdracht_security_login/login-form.php"); //stuur terug naar de login-form
+        header("location: /login-form.php"); //stuur terug naar de login-form
+        // /opdracht_security_login
       }
   }
 }
@@ -45,7 +47,8 @@ $_SESSION["boodschap"] = "dashboard database error = ". $e->getMessage();
 }
 else {
   $_SESSION["boodschap"] = "U moet eerst inloggen!";
-  header("location: /opdracht_security_login/login-form.php"); //stuur terug naar de login-form
+  header("location: /login-form.php"); //stuur terug naar de login-form
+  // /opdracht_security_login
 }
  ?>
 

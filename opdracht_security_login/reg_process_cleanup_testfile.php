@@ -30,7 +30,8 @@ if (isset($_POST["registreer"])) {
   {
     if (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)){ //fout email formaat
     $_SESSION["boodschap"] = "Juist email formaat ingegeven aub";
-    header("location: /opdracht_security_login/registratie-form.php");
+    header("location: /registratie-form.php");
+    // /opdracht_security_login
     }
     else{
       $email = $_POST["email"];
@@ -45,7 +46,8 @@ if (isset($_POST["registreer"])) {
         {
             $check = $q->fetch(PDO::FETCH_ASSOC);
             $row = $check['email'];
-            header("location: /opdracht_security_login/registratie-form.php");
+            header("location:/registratie-form.php");
+            //  /opdracht_security_login
             $_SESSION["boodschap"] = $row . ' bestaat al in de database' . '<br> <a href="/opdracht_security_login/login-form.php">Log in here </a>';
         }
         else //BESTAAT NOG NIET IN DB .. dan mag hij aangemaakt worden
@@ -69,7 +71,8 @@ if (isset($_POST["registreer"])) {
             $hashed_mail = hash("sha512", ($email . $random_salt)); //hash paswoord van de combinatie (posted paswoord & random salt) //  cookie
             $ttl_concat_hash_mail = $concat_mail_komma . $hashed_mail; //  cookie
             setcookie("login", $ttl_concat_hash_mail, time() + (86400 * 30) ); //  cookie
-            header("location: /opdracht_security_login/dashboard.php"); //relocate to dashboard met gesette cookie
+            header("location: /dashboard.php"); //relocate to dashboard met gesette cookie
+            // /opdracht_security_login
         }
       }
       catch (PDOException $e) {   // DB CONNECTIE FAILED - VANG OP
@@ -86,7 +89,8 @@ if (isset($_POST["registreer"])) {
     if(strlen($_POST["email"]) < 5){
       $_SESSION["boodschap"] = "groter emailadres ingeven plox";
     }
-      header("location: /opdracht_security_login/registratie-form.php");
+      header("location: /registratie-form.php");
+      // opdracht_security_login/
     }
 }
 if (isset($_POST["generate_pass"])) //generatePassword used
@@ -94,7 +98,8 @@ if (isset($_POST["generate_pass"])) //generatePassword used
         $_SESSION["session_pass"] = generatePassword();
         $_SESSION["email"] = $_POST["email"];
         var_dump($_SESSION["session_pass"]);
-        header("location: /opdracht_security_login/registratie-form.php");
+        header("location: /registratie-form.php");
+        // opdracht_security_login/
     } //LAAT HIER STAAN !!
     // session_unset($_SESSION["boodschap"]);
 

@@ -44,8 +44,8 @@ if(isset($_SESSION["foutboodschap"])){
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script> <!-- jQuery library toevoegen -->
     <script type="text/javascript">
-  	$(function(){
-    $('#email_form').submit(function(){
+    $('#email-form').submit(function(){
+  					// var formData	=	$('#mail-form').serialize();
   					$.ajax({
   						type: 'POST',
   						url: 'contact_api.php',
@@ -68,8 +68,6 @@ if(isset($_SESSION["foutboodschap"])){
   									}
   						})
   					return false;
-          })
-        })
     </script>
   </body>
 </html>

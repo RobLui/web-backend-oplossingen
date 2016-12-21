@@ -53,7 +53,8 @@ if (isset($_POST["registreer"]) ) {
         //FOUTE EMAIL FORMAT INGEVOERD
         $emailErr = "Fout email formaat ingegeven"; //foutboodschap bericht
         $_SESSION["foutboodschap"] = $emailErr; //steek de error in de session["foutboodschap"]
-        header("location: /opdracht_security_login/registratie-form.php"); //stuur terug naar de beginpage
+        header("location: /registratie-form.php"); //stuur terug naar de beginpage
+        //  /opdracht_security_login
         }
     else{
           try { // PROBEER IETS BIJ ALLES JUIST
@@ -93,7 +94,8 @@ if (isset($_POST["registreer"]) ) {
 
     if ($_POST["session_pass"] == " ")
     {
-      header("location: /opdracht_security_login/registratie-form.php");
+      header("location:/registratie-form.php");
+      // /opdracht_security_login
     }
 // NOG GEEN EMAIL POST GEBEURD HOE DAN OOK..
 else {
@@ -101,6 +103,7 @@ else {
   $_SESSION["boodschap"] = "Er is toch nog iets anders kunnen mislopen";
 }
 // HIER ZAT DE FOUT!!
-header("location: /opdracht_security_login/registratie-form.php");
+header("location: /registratie-form.php");
+//  /opdracht_security_login
 }
 ?>
